@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Select Language</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="{% static 'language/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'language/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="d-flex align-items-center justify-content-center">
+
+	<main id="main" class="main">
+
+		<section class="section">
+
+			<div class="row">
+
+				<div class="card">
+
+					<div class="card-body">
+
+						<div id="texta" class="d-flex align-items-center justify-content-center">
+							<span id="text1"></span>
+							<span id="text2"></span>
+						</div>
+
+
+						<div class="text-grow" id="button">
+							<a href="#" class="btn btn-blue btn-bg-ocean">
+								<p>English</p>
+							</a>
+						</div>
+
+
+						<div class="text-grow" id="button">
+							<a href="#" class="btn btn-blue btn-bg-desert">
+								<p>हिन्दी</p>
+							</a>
+						</div>
+
+						<div class="text-grow" id="button1">
+							<a href="#" class="btn btn-blue btn-bg-arctic">
+								<p>ગુજરાતી</p>
+							</a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<script src="{% static 'language/js/text.js' %}"></script>
+
+
+</body>
+
+</html>

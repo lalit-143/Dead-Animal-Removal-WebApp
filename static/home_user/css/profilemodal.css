@@ -1,0 +1,282 @@
+.profilemodal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(51, 40, 40, 0.733);
+    opacity: 0;
+    display: grid;
+    place-content: center;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.profilecontent {
+    box-shadow: 0px 0px 40px 20px rgba(46, 62, 62, 0.574);
+    background-image: linear-gradient(to top, #f3e7e9d2 0%, #e3eeffdc 99%, #e3eeff 100%);
+    width: 90vw;
+    border-radius: 2rem;
+    margin: 10px;
+    display: flex;
+    padding: 10px;
+    max-width: 350px;
+}
+
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.left {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  border: 3px solid;
+  border-color: rgba(0, 0, 0, 0.502);
+  padding: 10px;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  
+}
+
+.photo1{
+  position: relative;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.photo1 img {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+}
+.photo1:hover .circle, .photo1:hover .circle2 {
+  animation: circlespin 1s ease-in-out;
+}
+.photo1:hover .circle2 {
+  animation: circlespin 1s ease-in-out;
+}
+
+.circle, .circle2 {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black transparent black black;
+  animation: circlespinout 1s ease-in-out;
+}
+
+.circle2 {
+  top: -10px;
+  left: -10px;
+  width: 120px;
+  height: 120px;
+  border-color: black black black transparent;
+}
+
+.title__contain {
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+}
+.right {
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.button12{
+  background-image: linear-gradient(to top, #ebfffee5 0%, #accff9e8 100%);
+  width: 80%;
+  border: none;
+  border-radius: 15px;
+  margin: auto;
+  padding: 7px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.button12:hover {
+  background-image: linear-gradient(to top, #acc8c7e3 0%, #87a2c3d6 100%);
+  color: aliceblue;
+  border-color: azure;
+}
+
+.button13{
+  border: 1px solid black;
+  background-color: rgba(188, 226, 249, 0.573);
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  padding: 7px;
+  font-size: 14px;
+}
+
+.button13:hover {
+  background: #8699b3;
+  color: aliceblue;
+  border-color: azure;
+}
+
+.iconc1{
+  padding-right: 5px;
+  margin-left: -10px;
+}
+
+.editn{
+  padding-right: 5px;
+}
+
+.Username {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(18, 47, 54, 0.841);
+}
+
+.closep{
+  align-content: center;
+  font-size: 30px;
+  color: rgba(60, 69, 68, 0.711);
+
+}
+
+.closep:hover {
+  color: rgba(142, 72, 72, 0.897);
+}
+
+.hidep{
+  padding: 10px;
+  background-color: transparent;
+  border: transparent;
+}
+
+.hidep:hover{
+  background-color: transparent;
+  border: transparent;
+  color: #954d4d;
+
+}
+
+.title1 {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  color: rgba(63, 59, 59, 0.856);
+}
+
+.pf1{
+  letter-spacing: 1px;
+  font-size: 20px;  
+  border-bottom: 2px solid;
+  border-color: rgba(203, 209, 177, 0.563);
+  padding: 5px;
+}
+
+.pf2{
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 5px;
+}
+
+
+.rightbox0 {
+  margin-top: 10px;
+  background-image: linear-gradient(45deg, #698484e1 0%, #806472e2 100%);
+  color: rgb(255, 255, 255);
+  width: 90%;
+  height: 25%;
+  padding: 5px;
+  border-radius: 1rem;
+  display: flex;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.rightbox1 {
+  margin-top: 10px;
+  background-image: linear-gradient(45deg, #718d8de3 0%, #8b7090df 100%);
+  color: white;
+  width: 90%;
+  height: 25%;
+  padding: 5px;
+  border-radius: 1rem;
+  display: flex;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.rightbox2 {
+  margin-top: 10px;
+  background-image: linear-gradient(45deg, #686b83df 0%, #957878e1 100%);
+  color: white;
+  width: 90%;
+  height: 25%;
+  padding: 5px;
+  border-radius: 1rem;
+  display: flex;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.rightbox0:hover {
+  background-image: linear-gradient(45deg, #8baaaa 0%, #ae8b9c 100%);
+  color: rgb(26, 25, 25);
+
+}
+
+.rightbox1:hover {
+  background-image: linear-gradient(45deg, #90b2b2e3 0%, #a787acdf 100%);
+  color: rgb(26, 25, 25);
+}
+
+.rightbox2:hover {
+  background-image: linear-gradient(45deg, #868aa8df 0%, #b49090e1 100%);
+  color: rgb(26, 25, 25);
+}
+
+@keyframes circlespin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes circlespinout {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
