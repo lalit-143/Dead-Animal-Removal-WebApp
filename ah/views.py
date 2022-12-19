@@ -45,7 +45,7 @@ def signin(request, lid):
 # Send otp on entered number by user...
 @csrf_exempt
 def send_otp(request):
-    if request.method == 'POST':
+    if request.is_ajax or request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
         message = client.messages.create(
@@ -62,7 +62,7 @@ def send_otp(request):
 # Check Otp for auth
 @csrf_exempt
 def verify_otp(request):
-    if request.method == 'POST':
+    if request.is_ajax or request.method == "POST":
 
         if 'mobile_number' in request.session:
             mobile_number = request.session['mobile_number']
@@ -97,7 +97,7 @@ def verify_otp(request):
 @csrf_exempt
 def edit_name(request):
 
-    if request.method == 'POST':
+    if request.is_ajax or request.method == "POST":
         myuser = request.user
         user_name = request.POST.get('user_name')
         myuser.full_name = user_name
@@ -125,7 +125,7 @@ def home_user(request):
 @login_required(login_url='/language')
 @csrf_exempt
 def submit(request):
-    if request.method == 'POST':
+    if request.is_ajax or request.method == "POST":
         image = request.FILES.get('image')
         location = request.POST.get('location')
         description = request.POST.get('description')
@@ -152,7 +152,7 @@ def submit(request):
 @login_required(login_url='/language')
 @csrf_exempt
 def complaint(request):
-    if request.method == 'POST':
+    if request.is_ajax or request.method == "POST":
 
         case_id = request.POST.get('case_id')
         complaint = request.POST.get('complaint_box')
