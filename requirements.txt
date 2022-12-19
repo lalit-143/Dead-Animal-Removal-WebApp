@@ -1,7 +1,7 @@
 appdirs==1.4.3
 apturl==0.5.2
 asgiref==3.5.2
-backports.zoneinfo==0.2.1
+backports.zoneinfo==0.2.1;python_version<"3.9"
 bcrypt==3.1.7
 beautifulsoup4==4.8.2
 blinker==1.4
