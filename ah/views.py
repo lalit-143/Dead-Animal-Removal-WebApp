@@ -44,8 +44,8 @@ def signin(request, lid):
 
 # Send otp on entered number by user...
 @csrf_exempt
-def send_otp(request):
-    if request.is_ajax or request.method == "POST":
+def send_otp(request, *args, **kwargs):
+    if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
         message = client.messages.create(
