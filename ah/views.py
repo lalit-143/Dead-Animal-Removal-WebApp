@@ -65,9 +65,9 @@ def send_otp(request):
 def verify_otp(request):
     if request.method == "POST":
 
-        '''if 'mobile_number' in request.session:
+        if 'mobile_number' in request.session:
             mobile_number = request.session['mobile_number']
-        if 'send_otp' in request.session:
+        '''if 'send_otp' in request.session:
             s_otp = request.session['send_otp']'''
         r_otp = request.POST.get('receive_otp')
 
