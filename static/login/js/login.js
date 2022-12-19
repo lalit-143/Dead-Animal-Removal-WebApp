@@ -50,7 +50,7 @@ function sendotp(mobile_num) {
 
     var fd = new FormData()
     fd.append('mobile_num', mobile_num)
-    mobile = mobile_number
+    mobile = mobile_num;
 
     $.ajax({
             type:'POST',

@@ -253,10 +253,6 @@ function submitmodal() {
         descriptionbox = "None"
     }
 
-    console.log("UUID");
-    var uuid = new DeviceUUID().get();
-    console.log(uuid);
-
     var fd = new FormData()
     fd.append('image', blob)
     fd.append('location', link)
