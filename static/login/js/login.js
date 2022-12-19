@@ -58,6 +58,10 @@ function sendotp(mobile_num) {
             contentType: false,
             processData: false,
             dataType: 'json',
+            success: function (data) {
+                if (data.valid) {
+                    console.log("OTP Send Success")
+                }
             error: function (error) {
                 console.log("An error occurred")
             }        
