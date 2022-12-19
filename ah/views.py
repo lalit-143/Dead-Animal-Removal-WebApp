@@ -47,13 +47,13 @@ def signin(request, lid):
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        ''' otp = str(random.randint(1111, 9999))
+        otp = str(random.randint(1111, 9999))
         message = client.messages.create(
             body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
             from_="+19737914640",
             to="+919510242727"
         )
-    
+        '''
         request.session['mobile_number'] = mobile_number
         request.session['send_otp'] = otp '''
         data = { 'valid' : "OTP Send Success" } 
@@ -64,11 +64,12 @@ def send_otp(request):
 @csrf_exempt
 def verify_otp(request):
     if request.method == "POST":
-
+        '''
         if 'mobile_number' in request.session:
             mobile_number = request.session['mobile_number']
-        '''if 'send_otp' in request.session:
-            s_otp = request.session['send_otp']'''
+        if 'send_otp' in request.session:
+            s_otp = request.session['send_otp'] '''
+        mobile_number = request.POST.get('receive_num')
         r_otp = request.POST.get('receive_otp')
 
         if '1234' == r_otp:

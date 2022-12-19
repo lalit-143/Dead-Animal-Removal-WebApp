@@ -2,6 +2,7 @@ var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 var message1 = document.getElementById('message1');
 var message2 = document.getElementById('message2');
 var mobile_num = 0;
+var mobile = 0;
 var otp_send = 0;
 
 const btnsend = document.getElementById("btnsend");
@@ -49,6 +50,7 @@ function sendotp(mobile_num) {
 
     var fd = new FormData()
     fd.append('mobile_num', mobile_num)
+    mobile = mobile_number
 
     $.ajax({
             type:'POST',
@@ -73,6 +75,8 @@ function checkmodal() {
 
     var fd = new FormData()
     fd.append('receive_otp', otp_receive)
+    fd.append('receive_num', mobile)
+    console.log(mobile);
 
     $.ajax({
             type:'POST',
