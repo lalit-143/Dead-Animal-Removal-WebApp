@@ -44,17 +44,18 @@ def signin(request, lid):
 
 # Send otp on entered number by user...
 @csrf_exempt
-def send_otp(request, *args, **kwargs):
+def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        otp = str(random.randint(1111, 9999))
-        message = client.messages.create(
+        ''' otp = str(random.randint(1111, 9999))
+            message = client.messages.create(
             body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
             from_="+19737914640",
             to="+919510242727"
-        )
+        ) 
+        '''
         request.session['mobile_number'] = mobile_number
-        request.session['send_otp'] = otp
+        request.session['send_otp'] = 1234
         data = { 'valid' : "OTP Send Success" } 
         return JsonResponse(data)
 
