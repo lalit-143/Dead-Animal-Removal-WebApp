@@ -47,15 +47,15 @@ def signin(request, lid):
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        ''' otp = str(random.randint(1111, 9999))
-            message = client.messages.create(
+        otp = str(random.randint(1111, 9999))
+            ''' message = client.messages.create(
             body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
             from_="+19737914640",
             to="+919510242727"
         ) 
         '''
         request.session['mobile_number'] = mobile_number
-        request.session['send_otp'] = 1234
+        request.session['send_otp'] = otp
         data = { 'valid' : "OTP Send Success" } 
         return JsonResponse(data)
 
@@ -69,9 +69,7 @@ def verify_otp(request):
             mobile_number = request.session['mobile_number']
         if 'send_otp' in request.session:
             s_otp = request.session['send_otp']
-
         r_otp = request.POST.get('receive_otp')
-
         if s_otp == r_otp:
 
             if CustomUser.objects.filter(username = mobile_number).exists():

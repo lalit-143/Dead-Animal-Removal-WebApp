@@ -62,9 +62,6 @@ function sendotp(mobile_num) {
                 if (data.valid) {
                     console.log("OTP Send Success")
                 }
-            error: function (error) {
-                console.log("An error occurred")
-            }        
         })
 
 }
@@ -93,10 +90,7 @@ function checkmodal() {
                     message2.classList.remove('hidden');
                 }
             },
-            error: function (error) {
-                console.log("An error occurred")
-            }
-
+        
         })
 
 }
