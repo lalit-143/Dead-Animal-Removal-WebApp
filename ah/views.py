@@ -45,23 +45,25 @@ def signin(request, lid):
 # Send otp on entered number by user...
 @csrf_exempt
 def send_otp(request):
-    mobile_number = request.POST.get('mobile_num')
-    otp = str(random.randint(1111, 9999))
-    message = client.messages.create(
-        body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
-        from_="+19737914640",
-        to="+919510242727"
-    )
-    request.session['mobile_number'] = mobile_number
-    request.session['send_otp'] = otp
-    data = { 'valid' : "OTP Send Success" } 
-    return JsonResponse(data)
+    if request.is_ajax or request.method == "POST":
+        mobile_number = request.POST.get('mobile_num')
+        otp = str(random.randint(1111, 9999))
+        message = client.messages.create(
+            body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
+            from_="+19737914640",
+            to="+919510242727"
+        )
+        request.session['mobile_number'] = mobile_number
+        request.session['send_otp'] = otp
+        data = { 'valid' : "OTP Send Success" } 
+        return JsonResponse(data)
 
 
 # Check Otp for auth
 @csrf_exempt
 def verify_otp(request):
     if request.is_ajax or request.method == "POST":
+
         if 'mobile_number' in request.session:
             mobile_number = request.session['mobile_number']
         if 'send_otp' in request.session:
@@ -102,7 +104,7 @@ def edit_name(request):
         myuser.save()
         return redirect('home')
 
-'''=============== User ==============='''
+'''================== User ==============='''
 
 # Home page view for user
 @login_required(login_url='/language')

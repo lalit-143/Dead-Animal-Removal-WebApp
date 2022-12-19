@@ -57,9 +57,10 @@ function sendotp(mobile_num) {
             data: fd,
             contentType: false,
             processData: false,
+            dataType: 'json',
             error: function (error) {
                 console.log("An error occurred")
-            }
+            }        
         })
 
 }
