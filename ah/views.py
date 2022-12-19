@@ -48,7 +48,7 @@ def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
-        'message = client.messages.create(
+        message = client.messages.create(
             body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
             from_="+19737914640",
             to="+919510242727"
