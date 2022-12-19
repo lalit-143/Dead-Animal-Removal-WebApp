@@ -96,7 +96,7 @@
                     </button>
 
 
-                    <button class="resend text-muted text-center" id="btnresend">
+                    <button class="resend text-muted text-center" id="btnresend" onclick="resendotp()">
                         Didn't receive code?
                         <span class="btn-resend">Resend</span>
                     </button>
@@ -123,6 +123,7 @@
 
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'login/js/app.js' %}"></script>
     <script src="{% static 'login/js/login.js' %}"></script>
 

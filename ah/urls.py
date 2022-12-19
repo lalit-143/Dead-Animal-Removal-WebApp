@@ -2,9 +2,36 @@ from django.urls import path
 from ah import views
 
 urlpatterns = [
+	
+	# =============== User / Worker =================
+
+	# for landing page...
 	path('', views.home, name="home"),
-	path('signin', views.signin, name="signin"),
-	path('submit', views.submit, name="submit"),
+
+	# for select language...
 	path('language', views.language, name="language"),
+
+	# for authentication...
+	path('signin/<str:lid>', views.signin, name="signin"),
+	path('sendotp', views.send_otp, name="sendotp"),
+	path('verifyotp', views.verify_otp, name="verifyotp"),
+
+	# for edit or set name...
+	path('editname', views.edit_name, name="editname"),
+
+	# =================== User =======================
+
+	# for homepage
+	path('user', views.home_user, name="home_user"),
+
+	# for submit case...
+	path('submit', views.submit, name="submit"),
+
+	# for add complaint...
+	path('complaint', views.complaint, name="complaint"),
+
+	# ================== Worker ======================
+
+	path('worker', views.home_worker, name="home_worker"),
 
 ]

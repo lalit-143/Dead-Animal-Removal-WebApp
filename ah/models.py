@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 # Create your models here.
 
@@ -19,27 +20,47 @@ class CustomUser(AbstractUser):
 
 	user_type = models.CharField(choices=typeuser, max_length=10, default=1)
 	language = models.CharField(choices=typelanguage, max_length=10, default=1)
-	full_name = models.CharField(max_length=100, default="User")
+	full_name = models.CharField(max_length=100, default="")
 	total_case = models.IntegerField(default=0)
 	pending_case = models.IntegerField(default=0)
 	solved_case = models.IntegerField(default=0)
+
+	def __str__(self):
+
+		return self.full_name + " - " + str(self.id)
 
 
 class Case(models.Model):
 
 	typestatus = (
-		('2','Solved'),
-		('1','Pending'),
+		('Solved','Solved'),
+		('Pending','Pending'),
 	)
 
-	user_id = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+	user_id = models.ForeignKey(CustomUser, related_name = 'user_id', on_delete=models.DO_NOTHING)
 	image = models.ImageField(upload_to = 'img')
 	location = models.CharField(max_length=500, default=None)
-	date = models.DateTimeField(auto_now_add=True)
-	status = models.CharField(choices=typestatus, max_length=10, default=1)
+	date = models.CharField(max_length=100, default="DD-MM-YYYY")
+	status = models.CharField(choices=typestatus, max_length=10, default='Pending')
 	description = models.TextField(default=None)
-
+	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING, default=45)
 
 	def __str__(self):
-		idstr = str(self.id)
-		return idstr + " -- " + status 
+
+		dt = self.date
+		sts = self.status
+		cid = str(self.id)
+		return dt + " ( " + sts + " ) " + cid
+
+
+class Complaint(models.Model):
+
+	case_id = models.ForeignKey(Case, on_delete=models.CASCADE)
+	complaint_date = models.CharField(max_length=100, default="DD-MM-YYYY")
+	complaint_box = models.TextField(default=None)
+
+	def __str__(self):
+
+		dt = self.complaint_date
+		sts = self.case_id.status
+		return dt + " ( " + sts + " ) "

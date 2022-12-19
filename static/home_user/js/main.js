@@ -1,13 +1,19 @@
-const trigger = document.getElementById("trigger");
+var lbtn2 = document.getElementById('lbtn2');
+var message1 = document.getElementById('message1');
+var message2 = document.getElementById('message2');
 
+const trigger = document.getElementById("trigger");
 const modal1 = document.getElementById("modal1");
 const modal2 = document.getElementById("modal2");
 const modal3 = document.getElementById("modal3");
-const modalstatus = document.getElementById("modalstatus");
+const modalsolved = document.getElementById("modalsolved");
+const modalpending = document.getElementById("modalpending");
 const modalprofile = document.getElementById("modalprofile");
 const modalsetting = document.getElementById("modalsetting");
 const modalen = document.getElementById("modalen");
 const modalcomp = document.getElementById("modalcomp");
+const modalstatus = document.getElementById("modalstatus");
+
 
 const closebtn = document.getElementById("closebtn");
 const clickbtn = document.getElementById("clickbtn");
@@ -15,19 +21,13 @@ const retakebtn = document.getElementById("retakebtn");
 const submitbtn = document.getElementById("submitbtn");
 const finishbtn = document.getElementById("finishbtn");
 
-const showstatus = document.getElementById("showstatus");
-const hidestatus = document.getElementById("hidestatus");
-
 const showprofile = document.getElementById("ShowProfile");
 const hideprofile = document.getElementById("hideprofile");
 
 const showsetting = document.getElementById("Showsetting");
-const hidesetting = document.getElementById("Hidesetting");
 
 const editname = document.getElementById("editname");
-const btncomp = document.getElementById("btncomp");
 const cancomp = document.getElementById("cancomp");
-
 
 
 trigger.addEventListener("click", startmodal1);
@@ -35,20 +35,14 @@ closebtn.addEventListener("click", closemodal);
 clickbtn.addEventListener("click", closepic);
 retakebtn.addEventListener("click", retakemodal);
 
-submitbtn.addEventListener("click", submitmodal);
+submitbtn.addEventListener("click", submitcase);
 finishbtn.addEventListener("click", finishmodal);
 
-showstatus.addEventListener("click", togglestatus);
-hidestatus.addEventListener("click", togglestatus);
-
+showsetting.addEventListener("click", showsettingmodal);
 showprofile.addEventListener("click", showprofilemodal);
 hideprofile.addEventListener("click", showprofilemodal);
 
-showsetting.addEventListener("click", showsettingmodal);
-hidesetting.addEventListener("click", showsettingmodal);
-
 editname.addEventListener("click", showmodalen);
-btncomp.addEventListener("click", showmodalcomp);
 cancomp.addEventListener("click", showmodalcomp);
 
 
@@ -68,6 +62,14 @@ function togglestatus() {
     modalstatus.classList.toggle("show-modal");
 }
 
+function togglesolved() {
+    modalsolved.classList.toggle("show-modal");
+}
+
+function togglepending() {
+    modalpending.classList.toggle("show-modal");
+}
+
 function showprofilemodal() {
     modalprofile.classList.toggle("show-modal");
 }
@@ -78,11 +80,21 @@ function showsettingmodal() {
 
 function showmodalen() {
     showprofilemodal();
-    modalen.classList.toggle("show-modal");
+    shownamemodal();
 }
 
-function showmodalcomp() {
+function showmodalcomp(id) {
+    showcomp();
+    caseid = id;
+
+}
+
+function showcomp(id) {
     modalcomp.classList.toggle("show-modal");
+}
+
+function shownamemodal() {
+    modalen.classList.toggle("show-modal");
 }
 
 
@@ -100,6 +112,9 @@ function closemodal() {
 function closepic() {
     clickpic();
     togglemodal1();
+    lbtn2.classList.add('lbtn2');
+    message1.classList.add('hidden');
+    message2.classList.add('hidden');
     closecam();
     togglemodal2();
 }
@@ -110,14 +125,56 @@ function retakemodal() {
     togglemodal1();
 }
 
-function submitmodal() {
-    togglemodal2();
-    togglemodal3();
 
+
+function submitcase() {
+    if (link != ""){
+        submitmodal();
+    }
 }
 
 function finishmodal() {
     togglemodal3();
+    window.location = "/";
+}
+
+function windowOnClick(event) {
+    if (event.target === modalsetting) {
+        showsettingmodal();
+    }
+}
+
+
+window.addEventListener("click", windowOnClick);
+
+var photo;
+var link = "";
+var caseid;
+var name = document.getElementById('full_name').value;
+
+if (name == "") {
+    shownamemodal();
+}
+
+function setname() {
+    var name = document.getElementById('full_name').value;
+    var fd = new FormData()
+    fd.append('user_name', name)
+
+    $.ajax({
+            type:'POST',
+            url:'/editname',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            error: function (error) {
+                console.log("An error occurred to change name")
+            }
+        })
+
+    window.location = "/";
+
 }
 
 
@@ -157,21 +214,120 @@ function clickpic() {
     canvas.height = video.videoHeight;
     canvas.getContext('2d').drawImage(video, 0, 0);
     image = canvas.getContext('2d')
-    var photo = canvas.toDataURL('image/png');
+    photo = canvas.toDataURL('image/png');
 }
 
 
-var coll = document.getElementsByClassName("collapsible1");
-var i;
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }       
+    message1.classList.add('hidden');
+    message2.classList.remove('hidden');
+  }
 
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
+function showPosition(position) {
+
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    link = "https://www.google.com/maps?q=" + lat + "," + lng;
+    lbtn2.classList.remove('lbtn2');     
+    message2.classList.add('hidden');   
+    message1.classList.remove('hidden');
+}
+
+
+function submitmodal() {
+    togglemodal2();
+
+    var ImageURL = photo;
+    var block = ImageURL.split(";");
+    var contentType = block[0].split(":")[1];
+    var realData = block[1].split(",")[1];
+
+    var blob = b64toBlob(realData, contentType)
+
+    var descriptionbox = document.getElementById('descriptionbox').value;
+
+    if (descriptionbox == ""){
+        descriptionbox = "None"
+    }
+
+    console.log("UUID");
+    var uuid = new DeviceUUID().get();
+    console.log(uuid);
+
+    var fd = new FormData()
+    fd.append('image', blob)
+    fd.append('location', link)
+    fd.append('description', descriptionbox)
+
+        $.ajax({
+            type:'POST',
+            url:'/submit',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            error: function (error) {
+                console.log("An error occurred")
+            }
+
+        })
+
+    togglemodal3();
+
+}
+
+
+
+function submitcomp() {
+
+    var compbox = document.getElementById('complaintbox').value;
+
+    var fd = new FormData()
+    fd.append('complaint_box', compbox)
+    fd.append('case_id', caseid)
+
+        $.ajax({
+            type:'POST',
+            url:'/complaint',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            error: function (error) {
+                console.log("An error occurred")
+            }
+
+        })
+
+    showmodalcomp();
+
+}
+
+
+
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data); // window.atob(b64Data)
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
         }
-    });
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, {type: contentType});
+    return blob;
 }

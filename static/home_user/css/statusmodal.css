@@ -63,8 +63,9 @@
   text-align: center;
   outline: none;
   position: absolute;
-  padding: 10px;
+  padding: 20px;
   right: 25px;
+  margin-right: -10px;
 }
 
 .btnhide2:hover {
@@ -83,14 +84,14 @@
 
 
 pending {
-  color: rgb(250, 180, 161);
+  color: rgb(114, 72, 54);
   font-weight: 500;
   font-size: 15px;
   letter-spacing: 1px;
 }    
 
 solved {
-  color: rgb(151, 247, 186);
+  color: rgb(43, 84, 58);
   font-weight: 500;
   font-weight: 500;
   font-size: 15px;
@@ -113,12 +114,75 @@ s1 {
   color: rgb(0, 0, 0);
   font-weight: 500;
   font-weight: 500;
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 14px;
 }
 
 s1:hover {
   color: #ebeef4;
+}
+
+
+s2 {
+  font-weight: 500;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ebeef4;
+
+}
+
+s2:hover {
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+
+wpending {
+  color: rgb(114, 72, 54);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: "Mulish", sans-serif;
+  margin-left: -30px;
+
+}    
+
+wsolved {
+  color: rgb(43, 84, 58);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: "Mulish", sans-serif;
+  margin-left: -30px;
+
+}  
+
+
+ws1 {
+  color: rgb(0, 0, 0);
+  font-family: "Mulish", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+
+}
+
+ws1:hover {
+  color: #ebeef4;
+}
+
+
+ws2 {
+  font-weight: 500;
+  font-family: "Mulish", sans-serif;
+  font-size: 15px;
+  color: #ebeef4;
+  font-weight: 500;
+
+}
+
+ws2:hover {
+  color: rgb(0, 0, 0);
 }
 
 

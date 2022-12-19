@@ -1,0 +1,476 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Animal's Heaven</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="{% static 'home_user/css/vegas.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home_user/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home_user/css/stylemodal.css' %}">
+	<link rel="stylesheet" href="{% static 'home_user/css/statusmodal.css' %}">
+	<link rel="stylesheet" href="{% static 'home_user/css/profilemodal.css' %}">
+
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+
+	<section class="preloader">
+	</section>
+	<section id="home">
+
+		<div class="container">
+			<div class="row">
+
+				<div>
+					<div class="home-thumb">
+						<h1 class="wow fadeInUp" data-wow-delay="0.4s"> નમસ્તે , {{user.full_name}}</h1>
+						<button class="btn fadeInUp" id="trigger"> જાણ કરો  </button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<nav class="nav nav--icons">
+			<ul>
+				<li>
+					<a href="/">
+						<svg class="icon icon-home" viewBox="0 0 24 24" width="24" height="24">
+							<g fill="currentColor">
+								<path
+									d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z">
+								</path>
+							</g>
+						</svg>
+
+						<span>હોમ</span>
+					</a>
+				</li>
+
+				<button class="btnhide" onclick="togglestatus()">
+					<li>
+
+						<a>
+							<svg class="icon icon-news" viewBox="0 0 24 24" width="24" height="24">
+								<g fill="currentColor">
+									<path fill="currentColor"
+										d="M17 2h-10c-1.7 0-3 1.3-3 3v16c0 0.4 0.2 0.7 0.5 0.9s0.7 0.1 1-0.1l6.4-4.6 6.4 4.6c0.2 0.1 0.4 0.2 0.6 0.2s0.3 0 0.5-0.1c0.3-0.2 0.5-0.5 0.5-0.9v-16c0.1-1.7-1.2-3-2.9-3zM18 19.1l-5.4-3.9c-0.2-0.1-0.4-0.2-0.6-0.2s-0.4 0.1-0.6 0.2l-5.4 3.9v-14.1c0-0.6 0.4-1 1-1h10c0.6 0 1 0.4 1 1v14.1z">
+									</path>
+								</g>
+							</svg>
+							<span>સ્ટેટસ</span>
+						</a>
+					</li>
+
+				</button>
+
+				<button class="btnhide" id="ShowProfile">
+
+					<li>
+						<a>
+							<svg class="icon icon-profile" viewBox="0 0 24 24" width="24" height="24">
+								<g fill="currentColor">
+
+									<path
+										d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
+									</path>
+								</g>
+							</svg>
+
+							<span>પ્રોફાઈલ</span>
+						</a>
+					</li>
+
+				</button>
+
+				<button class="btnhide" id="Showsetting">
+
+					<li>
+						<a>
+
+							<svg class="icon icon-setting" width="24" height="24" viewBox="0 0 24 24">
+								<g fill="currentColor">
+									<path
+										d="M12 16c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0-6c1.084 0 2 .916 2 2s-.916 2-2 2-2-.916-2-2 .916-2 2-2z">
+									</path>
+									<path
+										d="m2.845 16.136 1 1.73c.531.917 1.809 1.261 2.73.73l.529-.306A8.1 8.1 0 0 0 9 19.402V20c0 1.103.897 2 2 2h2c1.103 0 2-.897 2-2v-.598a8.132 8.132 0 0 0 1.896-1.111l.529.306c.923.53 2.198.188 2.731-.731l.999-1.729a2.001 2.001 0 0 0-.731-2.732l-.505-.292a7.718 7.718 0 0 0 0-2.224l.505-.292a2.002 2.002 0 0 0 .731-2.732l-.999-1.729c-.531-.92-1.808-1.265-2.731-.732l-.529.306A8.1 8.1 0 0 0 15 4.598V4c0-1.103-.897-2-2-2h-2c-1.103 0-2 .897-2 2v.598a8.132 8.132 0 0 0-1.896 1.111l-.529-.306c-.924-.531-2.2-.187-2.731.732l-.999 1.729a2.001 2.001 0 0 0 .731 2.732l.505.292a7.683 7.683 0 0 0 0 2.223l-.505.292a2.003 2.003 0 0 0-.731 2.733zm3.326-2.758A5.703 5.703 0 0 1 6 12c0-.462.058-.926.17-1.378a.999.999 0 0 0-.47-1.108l-1.123-.65.998-1.729 1.145.662a.997.997 0 0 0 1.188-.142 6.071 6.071 0 0 1 2.384-1.399A1 1 0 0 0 11 5.3V4h2v1.3a1 1 0 0 0 .708.956 6.083 6.083 0 0 1 2.384 1.399.999.999 0 0 0 1.188.142l1.144-.661 1 1.729-1.124.649a1 1 0 0 0-.47 1.108c.112.452.17.916.17 1.378 0 .461-.058.925-.171 1.378a1 1 0 0 0 .471 1.108l1.123.649-.998 1.729-1.145-.661a.996.996 0 0 0-1.188.142 6.071 6.071 0 0 1-2.384 1.399A1 1 0 0 0 13 18.7l.002 1.3H11v-1.3a1 1 0 0 0-.708-.956 6.083 6.083 0 0 1-2.384-1.399.992.992 0 0 0-1.188-.141l-1.144.662-1-1.729 1.124-.651a1 1 0 0 0 .471-1.108z">
+									</path>
+								</g>
+							</svg>
+
+							<span>સેટિંગ</span>
+						</a>
+					</li>
+				</button>
+			</ul>
+		</nav>
+
+	</section>
+
+	<div class="modal" id="modal1">
+		<div class="modal-content">
+
+			<div class="align-content-center">
+				<video id="camera"></video>
+
+				<div class="btn2">
+
+					<button class="c1btn" id="closebtn">
+
+						<svg class="svg-icon" role="img" viewBox="0 0 512 512">
+							<path
+								d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
+						</svg>
+
+						બંધ  કરો
+					</button>
+
+					<button class="c2btn" id="clickbtn">
+						<svg class="svg-icon" role="img" viewBox="0 0 48 48">
+
+							<path d="M0 0h48v48h-48z" fill="none" />
+							<path
+								d="M18.8 21l9.53-16.51c-1.39-.31-2.84-.49-4.33-.49-4.8 0-9.19 1.69-12.64 4.51l7.33 12.69.11-.2zm24.28-3c-1.84-5.85-6.3-10.52-11.99-12.68l-7.32 12.68h19.31zm.52 2h-14.98l.58 1 9.53 16.5c3.26-3.56 5.27-8.29 5.27-13.5 0-1.37-.14-2.71-.4-4zm-26.53 4l-7.8-13.5c-3.26 3.56-5.27 8.29-5.27 13.5 0 1.37.14 2.71.4 4h14.98l-2.31-4zm-12.15 6c1.84 5.85 6.3 10.52 11.99 12.68l7.32-12.68h-19.31zm22.54 0l-7.8 13.51c1.4.31 2.85.49 4.34.49 4.8 0 9.19-1.69 12.64-4.51l-7.33-12.69-1.85 3.2z" />
+
+						</svg>
+						
+						ફોટો પાડો
+					</button>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="modal" id="modal2">
+		<div class="modal2-content">
+
+			<div class="align-content-center">
+				<canvas id="canvas"> </canvas>
+
+			
+				<button class="collapsible">
+					વર્ણન ઉમેરો
+
+				</button>
+
+				<div class="content">
+					<div class="desc">
+						<textarea class="description" id="descriptionbox" placeholder="આ ક્ષેત્ર વૈકલ્પિક છે"></textarea>
+					</div>
+				</div>
+
+				<button class="lbtn lbtn2" id="lbtn2" onclick="getLocation()">
+					સ્થાન ઉમેરો
+				</button>
+
+				<div id="message1" class="error1 hidden"> સ્થાન સફળતાપૂર્વક ઉમેર્યું </div>
+
+				<div id="message2" class="error2 hidden"> કૃપા કરીને સ્થાન સક્ષમ કરો </div>
+
+				<div class="btnrs">	
+
+					<button class="c3btn" id="retakebtn">
+
+
+						<svg class="svg-icon" role="img" viewBox="0 0 24 24" >
+							<path d="M12 16c1.671 0 3-1.331 3-3s-1.329-3-3-3-3 1.331-3 3 1.329 3 3 3z"></path>
+							<path d="M20.817 11.186a8.94 8.94 0 0 0-1.355-3.219 9.053 9.053 0 0 0-2.43-2.43 8.95 8.95 0 0 0-3.219-1.355 9.028 9.028 0 0 0-1.838-.18V2L8 5l3.975 3V6.002c.484-.002.968.044 1.435.14a6.961 6.961 0 0 1 2.502 1.053 7.005 7.005 0 0 1 1.892 1.892A6.967 6.967 0 0 1 19 13a7.032 7.032 0 0 1-.55 2.725 7.11 7.11 0 0 1-.644 1.188 7.2 7.2 0 0 1-.858 1.039 7.028 7.028 0 0 1-3.536 1.907 7.13 7.13 0 0 1-2.822 0 6.961 6.961 0 0 1-2.503-1.054 7.002 7.002 0 0 1-1.89-1.89A6.996 6.996 0 0 1 5 13H3a9.02 9.02 0 0 0 1.539 5.034 9.096 9.096 0 0 0 2.428 2.428A8.95 8.95 0 0 0 12 22a9.09 9.09 0 0 0 1.814-.183 9.014 9.014 0 0 0 3.218-1.355 8.886 8.886 0 0 0 1.331-1.099 9.228 9.228 0 0 0 1.1-1.332A8.952 8.952 0 0 0 21 13a9.09 9.09 0 0 0-.183-1.814z"></path>
+						</svg>
+
+						ફરીથી પાડો
+					</button>
+
+					<button class="c4btn" id="submitbtn">
+
+						મોકલો
+						<svg class="svg-icon" role="img" viewBox="0 0 24 24" >
+							<path d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"></path>
+						</svg>
+
+					</button>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="modal" id="modal3">
+		<div class="modal3-content">
+
+			<div class="thanks2">
+
+				<p class="t1"> આભાર! </p>
+
+				<p class="t2"> તમારો રિપોર્ટ સબમિટ થઇ ચુક્યો છે</p>
+
+				<p class="t3"> અમે જલ્દી કામ કરી રહ્યા છીએ </p>
+
+			</div>
+
+			<div class="btn3">
+				<button class="t1btn" id="finishbtn"> બંધ  કરો </button>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<div class="modal" id="modalstatus">
+		<div class="modal-content-1">
+
+			<div class="modal-heading">
+				સ્ટેટસ
+				<button class="btnhide2" onclick="togglestatus()">
+					<svg class="svg-icon2" role="img" viewBox="0 0 512 512">
+						<path
+							d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
+					</svg>
+				</button>
+
+			</div>
+
+			<div class="scrollbar" id="body-scroll">
+
+				<div class="card-body">
+
+					{% for c in cases %}
+
+					<button type="button" class="collapsible1">
+
+						<s1> {{c.date}} </s1>
+
+						{% if c.status == 'Pending' %}
+						<pending>(  બાકી  ) </pending> 
+						{% endif %}
+
+						{% if c.status == 'Solved' %}
+						<solved>( પૂર્ણ )</solved>
+						{% endif %}
+
+						<s2>( {{c.id}} )</s2>
+
+					</button>
+					<div class="content1">
+
+						<div>
+							<img class="image" src="/media/{{c.image}}" alt="Image">
+						</div>
+						
+						<button class="l1btn s2btn" onclick="showmodalcomp({{c.id}})"><i class="fa fa-comment"></i> ફરિયાદ ઉમેરો </button>
+
+						<a href="{{c.location}}" target="_blank">
+						<button class="l1btn"><i class="fa fa-location-arrow"></i> સ્થાન જુઓ </button>
+						</a>
+
+
+						{% if c.description != 'None' %}
+
+						<div>
+							<button class="description1">
+								<descr> વર્ણન </descr>
+								</br>
+								<descr2>{{c.description}}</descr2>
+							</button>
+						</div>
+
+						{% endif %}
+
+					</div>
+
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+
+	<div id="modalprofile" class="profilemodal">
+		<div class="profilecontent">
+
+			<div class="left">
+				<div class="photo1">
+					<div class="circle"></div>
+					<div class="circle2"></div>
+					<img alt="user photo1" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1435559/sloth.jpg">
+				</div>
+				<div class="title__contain">
+					<div class="Username">{{user.full_name}}</div>
+					<div class="title1">{{user.username}}</div>
+				</div>
+
+				<button class="button12" id="editname"> <i class='editn bx bxs-edit-alt'></i> નામ બદલાવો</button>
+
+
+				<button class="hidep" id="hideprofile">
+
+					<div class="closep"> <i class='bx bx-down-arrow-circle bx-fade-down'></i> </div>
+
+				</button>
+
+			</div>
+
+			<div class="right">
+				<div class="rightbox0">
+					<span class="pf1">{{user.total_case}}</span>
+					<span class="pf2">કેસ</span>
+				</div>
+				<div class="rightbox1">
+					<span class="pf1">{{user.pending_case}}</span>
+					<span class="pf2">બાકી</span>
+				</div>
+				<div class="rightbox2">
+					<span class="pf1">{{user.solved_case}}</span>
+					<span class="pf2">પૂર્ણ </span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<div class="modal" id="modalsetting">
+		<div class="settingcontent">
+
+			<div class="containers1">
+				<div class="btns1">
+					<a href="/language">
+						<button class="shop-now">ભાષા પસંદ કરો</button>
+					</a>
+					<div class="snowflake-grid to-left">
+						<div class="snowflake-item border-bottom border-right">
+							<div class="sub-items border-right border-bottom pull-down">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-bottom border-left">
+							<div class="sub-items border-right border-bottom r-90 pull-down-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-right">
+							<div class="sub-items border-right border-bottom r-270 pull-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-left">
+							<div class="sub-items border-right border-bottom r-180 pull-left">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+					</div>
+					<div class="snowflake-grid to-right">
+						<div class="snowflake-item border-bottom border-right">
+							<div class="sub-items border-right border-bottom pull-down">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-bottom border-left">
+							<div class="sub-items border-right border-bottom r-90 pull-down-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-right">
+							<div class="sub-items border-right border-bottom r-270 pull-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-left">
+							<div class="sub-items border-right border-bottom r-180 pull-left">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>	
+				
+			</div>
+			
+		</div>
+	</div>
+
+
+
+	<div class="modal" id="modalen">
+		<div class="editcontent">
+				
+				<h1 class="llfont">તમારું નામ દાખલ કરો</h1>
+				
+				<div class="form12">
+
+					<input type="text" id="full_name" value={{user.full_name}}>
+					<button id="login-button" onclick="setname()">થઈ ગયું</button>
+
+				</div>
+				
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
+	<div class="modalcomp" id="modalcomp">
+		<div class="compcontent">
+
+			<h1 class="chead">ફરિયાદ ઉમેરો</h1>
+				
+			<div class="form">
+
+			<textarea class="comp1" id="complaintbox"></textarea>
+
+			<button type="submit" class="subbtn" id="subcomp" onclick="submitcomp()">મોકલો</button>
+
+			<button type="submit" class="cancbtn" id="cancomp">રદ કરો</button>
+
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+	<script src="{% static 'home_user/js/main.js' %}"></script>
+	<script src="{% static 'home_user/js/jquery.js' %}"></script>
+	<script src="{% static 'home_user/js/custom.js' %}"></script>
+	<script src="{% static 'home_user/js/vegas.min.js' %}"></script>
+	<script src="{% static 'home_user/js/wow.min.js' %}"></script>
+
+</body>
+
+</html>

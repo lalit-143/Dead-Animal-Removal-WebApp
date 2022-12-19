@@ -60,8 +60,13 @@
 }
 
 .btn2 {
-  margin: 20px auto;
+  margin: 20px 10px auto 10px;
   margin-bottom: 0px;
+  text-align: center
+}
+
+.btnrs {
+  margin: auto;
   text-align: center
 }
 
@@ -99,7 +104,7 @@ canvas {
   text-align: center;
   outline: none;
   border-radius: 2rem;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .collapsible:hover {
@@ -154,9 +159,9 @@ canvas {
   background-color: rgba(155, 180, 225, 0.35);
   color: rgb(0, 0, 0);
   border-radius: 2rem;
-  font-size: 16px;
+  font-size: 15px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #000000;
   cursor: pointer;
   padding: 7px;
@@ -165,121 +170,136 @@ canvas {
   outline: none;
   border: 2px solid;
   border-color: #4c7f41e4;
-  border-color: #8a4747e4;
-
 }
 
 .lbtn:hover {
   background-color: rgba(81, 79, 135, 0.415);
-  border-color: #0c0c0c6e;
-  color: azure;
-
-}
-
-.rbtn {
-  border: 2px solid;
-  border-color: #518148e2;
-  background-color: rgba(179, 205, 144, 0.35);
-  color: rgb(0, 0, 0);
-  border-radius: 2rem;
-  font-size: 16px;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: #000000;
-  cursor: pointer;
-  padding: 7px;
-  text-align: center;
-  outline: none;
-  position: relative;
-}
-
-.rbtn:hover {
-  background-color: rgba(58, 93, 38, 0.415);
-  border-color: #00000066;
   color: azure;
 }
 
-
-.sbtn {
-  background-color: rgba(219, 159, 210, 0.633);
-  color: rgb(0, 0, 0);
-  border-radius: 2rem;
-  font-size: 16px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  text-transform: uppercase;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: #000000;
-  cursor: pointer;
-  padding: 7px;
-  text-align: center;
-  outline: none;
-  position: relative;
-  border: 2px solid rgba(79, 58, 85, 0.823);
-  box-shadow: 0px 0px 20px 3px rgba(77, 58, 78, 0.574);
+.lbtn2 {
+    border-color: #8a4747e4;
 }
 
-.sbtn:hover {
-  background-color: rgba(146, 94, 162, 0.515);
-  border-color: rgba(82, 97, 48, 0.887);
-  color: aliceblue;
+.error2 {
+    font-size: 15px;
+    text-align: center;
+    color: #875757eb;
+    background-color: #e8ddd724;
+    margin: -10px auto 10px auto;
 }
+
+
+.error1 {
+    font-size: 15px;
+    text-align: center;
+    color: #53744ee9;
+    background-color: #e8ddd727;
+    margin: -10px auto 10px auto;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .c1btn {
-  background-color: rgba(233, 182, 195, 0.892);
+  background-color: rgba(227, 171, 199, 0.35);
   color: rgb(0, 0, 0);
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   font-size: 16px;
   padding-bottom: 8px;
   padding-top: 5px;
-  width: 35%;
-  margin: 10px;
-  margin-right: 1.2vw;
+  width: 45%;
   color: #000000;
+  margin-right: 3%;
   cursor: pointer;
   text-align: center;
   outline: none;
-  position: relative;
-  border: 1px solid rgba(85, 58, 76, 0.823);
+  border: 2px solid rgba(85, 58, 76, 0.823);
   box-shadow: 0px 0px 30px 5px rgba(78, 58, 75, 0.574);
 }
 
 .c1btn:hover {
-  background-color: rgba(165, 127, 158, 0.867);
+  background-color: rgba(165, 127, 158, 0.803);
   color: azure;
   border-color: #000000;
 }
 
 .c2btn {
-  background-color: rgba(159, 219, 184, 0.894);
+  background-color: rgba(165, 219, 159, 0.379);
   color: rgb(0, 0, 0);
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   font-size: 16px;
   padding-bottom: 8px;
   padding-top: 5px;
-  width: 35%;
-  margin: 10px;
-  margin-left: 1.2vw;
+  width: 45%;
+  margin-left: 3%;
   color: #000000;
   cursor: pointer;
   border: 1px solid;
   border-color: #ebf8e7;
   text-align: center;
   outline: none;
-  position: relative;
-  border: 1px solid rgba(58, 85, 68, 0.823);
+  border: 2px solid rgba(58, 85, 68, 0.823);
   box-shadow: 0px 0px 30px 5px rgba(58, 78, 70, 0.574);
 }
 
 .c2btn:hover {
-  background-color: rgba(126, 169, 130, 0.871);
+  background-color: rgba(126, 169, 130, 0.803);
   color: azure;
   border-color: #000000;
 }
 
+
+
+.c3btn {
+  background-color: rgba(227, 171, 199, 0.35);
+  color: rgb(0, 0, 0);
+  border-radius: 1.5rem;
+  font-size: 15px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+  width: 45%;
+  color: #000000;
+  margin-right: 3%;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  border: 2px solid rgba(85, 58, 76, 0.823);
+  box-shadow: 0px 0px 30px 5px rgba(78, 58, 75, 0.574);
+}
+
+.c3btn:hover {
+  background-color: rgba(165, 127, 158, 0.803);
+  color: azure;
+  border-color: #000000;
+}
+
+.c4btn {
+  background-color: rgba(165, 219, 159, 0.379);
+  color: rgb(0, 0, 0);
+  border-radius: 1.5rem;
+  font-size: 15px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+  width: 45%;
+  margin-left: 3%;
+  color: #000000;
+  cursor: pointer;
+  border: 1px solid;
+  border-color: #ebf8e7;
+  text-align: center;
+  outline: none;
+  border: 2px solid rgba(58, 85, 68, 0.823);
+  box-shadow: 0px 0px 30px 5px rgba(58, 78, 70, 0.574);
+}
+
+.c4btn:hover {
+  background-color: rgba(126, 169, 130, 0.803);
+  color: azure;
+  border-color: #000000;
+}
 
 button:active {
     top: .1em;
@@ -321,16 +341,16 @@ button:active {
 }
 
 :root {
-  --color-1: #4a6985de;
-  --color-2: #4d7994e4;
-  --color-3: #a38d54e7;
-  --color-4: #9e6053dd;
-  --color-5: #975086e3;
+  --color-1: #2e4c27de;
+  --color-2: #264050e4;
+  --color-3: #443b23e7;
+  --color-4: #442721dd;
+  --color-5: #381c32e3;
 }
 
 .t1 {
   font-family: "Exo", sans-serif;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 900;
   margin: auto;
   text-transform: uppercase;
@@ -350,18 +370,18 @@ button:active {
 }
 
 :root {
-  --color-11: #876f54de;
-  --color-22: #88965ce3;
-  --color-33: #5f849ce3;
-  --color-44: #98669ce2;
-  --color-55: #9a6363e0;
+  --color-11: #483723de;
+  --color-22: #3e4721e3;
+  --color-33: #203543e3;
+  --color-44: #422244e2;
+  --color-55: #482424e0;
 }
 
 .t2 {
   font-family: "Exo", sans-serif;
   font-weight: 700;
   padding-top: 20px;
-  font-size: 22px;
+  font-size: 20px;
   margin: auto;
   text-transform: uppercase;
   background: linear-gradient(45deg, 
@@ -380,17 +400,17 @@ button:active {
 }
 
 :root {
-  --color-111: #b17aa2e4;
-  --color-222: #7a79b5de;
-  --color-333: #4f844fde;
-  --color-444: #c08585e5;
-  --color-555: #6c989ee2;
+  --color-111: #47233ee4;
+  --color-222: #27264bde;
+  --color-333: #214721de;
+  --color-444: #492323e5;
+  --color-555: #1f3d41e2;
 }
 
 .t3 {
   font-family: "Exo", sans-serif;
   font-weight: 500;
-  padding-top: 20px;
+  padding-top: 18px;
   padding-bottom: 10px;
   font-size: 20px;
   margin: auto;

@@ -46,7 +46,7 @@
   border-left-color: transparent;
   border-top-color: transparent;
   border-bottom-color: transparent;
-  
+  margin-left: -10px;
 }
 
 .photo1{
@@ -110,6 +110,7 @@
   padding: 7px;
   font-size: 14px;
   margin-bottom: 10px;
+  min-width: 110px;
 }
 
 .button12:hover {
@@ -179,6 +180,8 @@
   font-weight: 300;
   text-align: center;
   color: rgba(63, 59, 59, 0.856);
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .pf1{
@@ -280,3 +283,74 @@
     transform: rotate(0deg);
   }
 }
+
+.wlerror {
+  font-size: 15px;
+  text-align: center;
+  color: #452424;
+  margin:auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: rgba(253, 224, 224, 0.273);
+  border-radius: 1rem;
+  width: 80%;
+  padding: 5px;
+
+}
+
+.wtext{
+  font-family: "Mulish", sans-serif;
+  width: 80%;
+  margin: auto;
+  padding: 15px;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid;
+  border-color: rgba(220, 220, 220, 0.289);
+  border-radius: 1.2rem;
+}
+
+wltext{
+  color: rgb(187, 217, 219);
+}
+
+wltext1{
+  color: rgb(219, 216, 187);
+}
+
+.wbutton12{
+  width: 80%;
+  border-radius: 1.2rem;
+  font-size: 20px;
+  margin: auto;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px 10px 5px 10px;
+  border: 2px solid;
+  background-color: rgba(189, 208, 215, 0.397);
+  border-color: rgba(32, 22, 44, 0.867);
+  color: rgb(19, 33, 33);
+}
+
+.wbutton12:hover {
+  background-color: rgba(25, 50, 51, 0.373);
+  border-color: rgba(255, 255, 255, 0.832);
+  color: rgb(255, 255, 255);
+
+}
+
+
+.wlcontent {
+  box-shadow: 0px 0px 40px 20px rgba(46, 62, 62, 0.574);
+  background: linear-gradient(to bottom, #5d7487d5, #8e7561d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 90vw;
+  border-radius: 2rem;
+  margin: 10px;
+  padding: 10px;
+  max-width: 350px;
+  text-align: center;
+}
+
