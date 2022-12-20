@@ -1,5 +1,6 @@
 import random
 import datetime
+import twilio
 import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -8,7 +9,7 @@ from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from twilio.rest import Client
-from animal import settings
+from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 
