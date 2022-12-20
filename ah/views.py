@@ -44,8 +44,7 @@ def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
-        # Credentials for sms servece...
-        '''
+        
         account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
         auth_token = "d4c18f1efe6c2164fb334bf61038403b"
         client = Client(account_sid, auth_token)    
@@ -54,7 +53,6 @@ def send_otp(request):
             from_="+19737914640",
             to="+919510242727"
         )
-        '''
 
         request.session['my_otp'] = "1234"
         data = { 'success' : "OTP Send Success" } 
@@ -68,7 +66,7 @@ def verify_otp(request):
         mobile_number = request.POST.get('receive_num')
         r_otp = request.POST.get('receive_otp')
 
-        s_otp = request.session.get('my_otp', '0000')
+        s_otp = request.session.get('my_otp', '4747')
 
         if s_otp == r_otp:
 

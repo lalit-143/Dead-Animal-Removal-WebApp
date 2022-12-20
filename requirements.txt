@@ -1,12 +1,8 @@
 asgiref==3.5.2
 backports.zoneinfo==0.2.1
-cryptography==2.8
 Django==4.1.4
-django-active-link==0.1.8
-djangorestframework==3.14.0
 gunicorn==20.1.0
 Pillow==7.0.0
-simplejson==3.16.0
 six==1.14.0
 sqlparse==0.2.4
 twilio==7.15.4
