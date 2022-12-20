@@ -119,10 +119,7 @@ def submit(request):
         image = request.FILES.get('image')
         location = request.POST.get('location')
         description = request.POST.get('description')
-        current_time = datetime.datetime.now()
-        date = f"{current_time.day}-{current_time.month}-{current_time.year}"
-        date= str(dt.datetime(day, month, year))
-
+        date = str(dt.datetime(day, month, year))
 
         user = CustomUser.objects.get(id = request.user.id)
         worker = CustomUser.objects.get(id = 2)
