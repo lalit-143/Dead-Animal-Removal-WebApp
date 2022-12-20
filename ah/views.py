@@ -149,7 +149,6 @@ def complaint(request):
         complaint = request.POST.get('complaint_box')
         print(case_id)
         print(complaint)
-        current_time = datetime.datetime.now()
         date = strftime("%d-%m-%Y", gmtime())
 
         case = Case.objects.get(id = case_id)
