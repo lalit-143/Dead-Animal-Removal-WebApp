@@ -135,6 +135,7 @@ function submitcase() {
 
 function finishmodal() {
     togglemodal3();
+    window.location = "/";
 }
 
 function windowOnClick(event) {

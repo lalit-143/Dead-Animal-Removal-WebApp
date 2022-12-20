@@ -1,11 +1,11 @@
 import random
-import datetime
+from .models import *
+from datetime import datetime 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
-from .models import *
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
