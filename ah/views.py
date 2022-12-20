@@ -8,6 +8,8 @@ from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from twilio.rest import Client
+from animal import settings
+
 from django.contrib.auth.decorators import login_required
 
 # Select language page for user and worker..
@@ -45,15 +47,10 @@ def send_otp(request):
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
         request.session['my_otp'] = "1234"
-        
-        account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
-        auth_token = "d4c18f1efe6c2164fb334bf61038403b"
-        client = Client(account_sid, auth_token)    
-        message = client.messages.create(
-            body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}",
-            from_="+19737914640",
-            to="+919510242727"
-        )
+
+        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+        message = client.messages.create(to='+919510242727', from_='+19737914640', body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}" )
 
         data = { 'success' : "OTP Send Success" } 
         return JsonResponse(data)

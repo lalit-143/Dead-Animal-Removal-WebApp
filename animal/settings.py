@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+TWILIO_ACCOUNT_SID = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
+TWILIO_AUTH_TOKEN = "d4c18f1efe6c2164fb334bf61038403b"
+DJANGO_TWILIO_FORGERY_PROTECTION = False
+DJANGO_TWILIO_BLACKLIST_CHECK = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
