@@ -50,7 +50,6 @@ function sendotp(mobile_num) {
 
     var fd = new FormData()
     fd.append('mobile_num', mobile_num)
-    mobile = mobile_num;
 
     $.ajax({
             type:'POST',
@@ -61,9 +60,7 @@ function sendotp(mobile_num) {
             processData: false,
             dataType: 'json',
             success: function (data) {
-                if (data.valid) {
-                    console.log("OTP Send Success")
-                }
+                console.log(data.success)
             }
         })
 
@@ -76,7 +73,6 @@ function checkmodal() {
     var fd = new FormData()
     fd.append('receive_otp', otp_receive)
     fd.append('receive_num', mobile)
-    console.log(mobile);
 
     $.ajax({
             type:'POST',

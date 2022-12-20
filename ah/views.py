@@ -6,12 +6,16 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 import random
 import datetime
+import json
 from twilio.rest import Client
 from django.contrib.auth.decorators import login_required
+from cryptography.fernet import Fernet
+from rest_framework.response import Response
+global s_otp
 
 # Credentials for sms servece...
 account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
-auth_token = "3062d57b4c825cf027a1503b520bbc92"
+auth_token = "d4c18f1efe6c2164fb334bf61038403b"
 client = Client(account_sid, auth_token)
 
 # Select language page for user and worker..
@@ -53,26 +57,22 @@ def send_otp(request):
             from_="+19737914640",
             to="+919510242727"
         )
-        '''
-        request.session['mobile_number'] = mobile_number
-        request.session['send_otp'] = otp '''
-        data = { 'valid' : "OTP Send Success" } 
-        return JsonResponse(data)
 
+        request.session['my_otp'] = otp
+        data = { 'success' : "OTP Send Success" } 
+        return JsonResponse(data)
 
 # Check Otp for auth
 @csrf_exempt
 def verify_otp(request):
     if request.method == "POST":
-        '''
-        if 'mobile_number' in request.session:
-            mobile_number = request.session['mobile_number']
-        if 'send_otp' in request.session:
-            s_otp = request.session['send_otp'] '''
+    
         mobile_number = request.POST.get('receive_num')
         r_otp = request.POST.get('receive_otp')
 
-        if '1234' == r_otp:
+        s_otp = request.session.get('my_otp', '0000')
+
+        if s_otp == r_otp:
 
             if CustomUser.objects.filter(username = mobile_number).exists():
                 user = authenticate(username=mobile_number, password=mobile_number)
