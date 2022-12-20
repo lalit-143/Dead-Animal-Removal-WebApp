@@ -135,7 +135,9 @@ def submit(request):
         user.pending_case += 1
         user.save() 
         case_obj.save()
-        return redirect('home')
+        data = { 'success' : "Case Submited" }
+        return JsonResponse(data)
+
     return render(request, "home_user/index.html")
 
 # add complaint to pending case...

@@ -265,8 +265,9 @@ function submitmodal() {
             data: fd,
             contentType: false,
             processData: false,
-            error: function (error) {
-                console.log("An error occurred")
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.success)
             }
 
         })
