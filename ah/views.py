@@ -1,19 +1,16 @@
 import random
 import datetime
-import twilio
-import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
-from twilio.rest import Client
-import twilio.rest
 from django.conf import settings
-from twilio.rest import TwilioRestClient;
-
 from django.contrib.auth.decorators import login_required
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .auth import send_otp_to_phone
 
 # Select language page for user and worker..
 def language(request):
@@ -45,17 +42,13 @@ def signin(request, lid):
 
 # Send otp on entered number by user...
 @csrf_exempt
+@api_view(['POST'])
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        otp = str(random.randint(1111, 9999))
-        request.session['my_otp'] = "1234"
-
-        client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-
-        message = client.messages.create(to='+919510242727', from_='+19737914640', body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}" )
-
-        data = { 'success' : "OTP Send Success" } 
+        otp = send_otp_to_phone(mobile_number)
+        data = { 'success' : "OTP Send Success" }
+        request.session['my_otp'] = otp
         return JsonResponse(data)
 
 # Check Otp for auth
@@ -65,8 +58,8 @@ def verify_otp(request):
     
         mobile_number = request.POST.get('receive_num')
         r_otp = request.POST.get('receive_otp')
-
         s_otp = request.session.get('my_otp', '4747')
+
 
         if s_otp == r_otp:
 

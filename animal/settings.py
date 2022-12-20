@@ -16,10 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TWILIO_ACCOUNT_SID = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
-TWILIO_AUTH_TOKEN = "d4c18f1efe6c2164fb334bf61038403b"
-DJANGO_TWILIO_FORGERY_PROTECTION = False
-DJANGO_TWILIO_BLACKLIST_CHECK = True
+API_KEY = '6d7e7327-808b-11ed-9158-0200cd936042'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -43,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'ah'
+    'ah',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
