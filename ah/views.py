@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required
 # Credentials for sms servece...
 account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
 auth_token = "d4c18f1efe6c2164fb334bf61038403b"
-client = Client(account_sid, auth_token)
 
 # Select language page for user and worker..
 def language(request):
@@ -48,6 +47,7 @@ def signin(request, lid):
 @csrf_exempt
 def send_otp(request):
     if request.method == "POST":
+        client = Client(account_sid, auth_token)
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
         message = client.messages.create(
