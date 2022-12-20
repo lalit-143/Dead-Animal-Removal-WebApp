@@ -1,6 +1,5 @@
 import random
 from .models import *
-from datetime import datetime 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
@@ -11,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .auth import send_otp_to_phone
+import datetime as dt
 
 # Select language page for user and worker..
 def language(request):
@@ -121,6 +121,8 @@ def submit(request):
         description = request.POST.get('description')
         current_time = datetime.datetime.now()
         date = f"{current_time.day}-{current_time.month}-{current_time.year}"
+        date= str(dt.datetime(day, month, year))
+
 
         user = CustomUser.objects.get(id = request.user.id)
         worker = CustomUser.objects.get(id = 2)
