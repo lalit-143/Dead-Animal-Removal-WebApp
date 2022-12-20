@@ -44,6 +44,7 @@ def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
         otp = str(random.randint(1111, 9999))
+        request.session['my_otp'] = "1234"
         
         account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
         auth_token = "d4c18f1efe6c2164fb334bf61038403b"
@@ -54,7 +55,6 @@ def send_otp(request):
             to="+919510242727"
         )
 
-        request.session['my_otp'] = "1234"
         data = { 'success' : "OTP Send Success" } 
         return JsonResponse(data)
 
