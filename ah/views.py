@@ -1,17 +1,15 @@
+import random
+import datetime
+import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
-import random
-import datetime
-import json
+
 from twilio.rest import Client
 from django.contrib.auth.decorators import login_required
-from cryptography.fernet import Fernet
-from rest_framework.response import Response
-global s_otp
 
 # Credentials for sms servece...
 account_sid = "AC771e05bdbffeea4b4dd8b848cbf1d1d3"
