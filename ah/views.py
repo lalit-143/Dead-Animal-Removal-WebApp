@@ -119,7 +119,7 @@ def submit(request):
         image = request.FILES.get('image')
         location = request.POST.get('location')
         description = request.POST.get('description')
-        date = strftime("%d-%m-%Y %H:%M:%S", gmtime())
+        date = strftime("%d-%m-%Y", gmtime())
 
         user = CustomUser.objects.get(id = request.user.id)
         worker = CustomUser.objects.get(id = 2)
@@ -150,7 +150,7 @@ def complaint(request):
         print(case_id)
         print(complaint)
         current_time = datetime.datetime.now()
-        date = f"{current_time.day}-{current_time.month}-{current_time.year}"
+        date = strftime("%d-%m-%Y", gmtime())
 
         case = Case.objects.get(id = case_id)
 
