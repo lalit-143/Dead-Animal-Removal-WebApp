@@ -9,6 +9,7 @@ from django.contrib.auth import  authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from twilio.rest import Client
+import twilio.rest
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -49,7 +50,7 @@ def send_otp(request):
         otp = str(random.randint(1111, 9999))
         request.session['my_otp'] = "1234"
 
-        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+        client = twilio.rest.TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
         message = client.messages.create(to='+919510242727', from_='+19737914640', body=f"{mobile_number} Want To Login In Your Animal's Heaven. There OTP is {otp}" )
 
