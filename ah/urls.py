@@ -34,4 +34,7 @@ urlpatterns = [
 
 	path('worker', views.home_worker, name="home_worker"),
 
+	# for Add Location of worker
+	path('addlocation', views.add_location, name="add_location"),
+
 ]

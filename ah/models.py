@@ -29,6 +29,12 @@ class CustomUser(AbstractUser):
 
 		return self.full_name + " - " + str(self.id)
 
+class Worker(models.Model):
+	user_id = models.ForeignKey(CustomUser, related_name = 'user_worker_id', on_delete=models.DO_NOTHING)
+	latitude = models.CharField(max_length=100, default="")
+	longitude = models.CharField(max_length=100, default="")
+
+
 
 class Case(models.Model):
 
@@ -43,7 +49,7 @@ class Case(models.Model):
 	date = models.CharField(max_length=100, default="DD-MM-YYYY")
 	status = models.CharField(choices=typestatus, max_length=10, default='Pending')
 	description = models.TextField(default=None)
-	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING, default=45)
+	worker_id = models.ForeignKey(Worker, related_name = 'worker_id', on_delete=models.DO_NOTHING)
 
 	def __str__(self):
 

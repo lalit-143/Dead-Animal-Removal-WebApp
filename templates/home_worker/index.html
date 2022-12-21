@@ -379,6 +379,8 @@
 				<div class="title__contain">
 					<div class="Username">{{user.full_name}}</div>
 					<div class="title1">{{user.username}}</div>
+					<input type="text" id="worker_location" value="{{user.lat}}"hidden>
+
 				</div>
 
 				<button class="button12" id="editname"> <i class='editn bx bxs-edit-alt'></i> Edit Name</button>
@@ -474,14 +476,14 @@
 
 
 
-	<div class="modal" id="modalen1">
+	<div class="modal" id="modalen">
 		<div class="editcontent">
 				
 				<h1 class="llfont">Enter Your Name</h1>
 				
 				<div class="form12">
 
-					<input type="text" id="full_name" value={{user.full_name}}>
+					<input type="text" id="full_name" value="{{user.full_name}}">
 					<button id="login-button" onclick="setname()">Done</button>
 
 				</div>
@@ -505,7 +507,7 @@
 
 
 
-	<div class="modal" id="modalen">
+	<div class="modal" id="modalal">
 		<div class="wlcontent">
 				
 				<h1 class="llfont">Add Location</h1>
@@ -519,7 +521,7 @@
 
 				<div id="wlmessage" class="wlerror hidden"> Please Enable Location </div>
 		
-				<button class="wbutton12" onclick="shownamemodal()"> 
+				<button class="wbutton12" onclick="hidemodalal()"> 
 					<i class='bx bxs-location-plus bx-flip-horizontal bx-burst' ></i>
 				</button>
 				

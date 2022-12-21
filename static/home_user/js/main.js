@@ -1,6 +1,8 @@
 var lbtn2 = document.getElementById('lbtn2');
 var message1 = document.getElementById('message1');
 var message2 = document.getElementById('message2');
+var wlmessage = document.getElementById('wlmessage');
+
 
 const trigger = document.getElementById("trigger");
 const modal1 = document.getElementById("modal1");
@@ -11,6 +13,7 @@ const modalpending = document.getElementById("modalpending");
 const modalprofile = document.getElementById("modalprofile");
 const modalsetting = document.getElementById("modalsetting");
 const modalen = document.getElementById("modalen");
+const modalal = document.getElementById("modalal");
 const modalcomp = document.getElementById("modalcomp");
 const modalstatus = document.getElementById("modalstatus");
 
@@ -78,9 +81,18 @@ function showsettingmodal() {
     modalsetting.classList.toggle("show-modal");
 }
 
+function showmodalal() {
+    modalal.classList.toggle("show-modal");
+}
+
 function showmodalen() {
     showprofilemodal();
     shownamemodal();
+}
+
+function hidemodalal() {
+    showemodalal();
+    SubmitLocation();
 }
 
 function showmodalcomp(id) {
@@ -151,9 +163,15 @@ var photo;
 var link = "";
 var caseid;
 var name = document.getElementById('full_name').value;
+var worker_location = document.getElementById('worker_location').value;
+
 
 if (name == "") {
     shownamemodal();
+}
+
+if (worker_location == "") {
+    showmodalal();
 }
 
 function setname() {
@@ -303,6 +321,40 @@ function submitcomp() {
 
 }
 
+function SubmitLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showWorkerPosition);
+  }       
+    wlmessage.classList.add('hidden');
+  }
+
+function showWoekerPosition(position) {
+
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+
+    wlmessage.classList.remove('hidden');
+
+    var fd = new FormData()
+    fd.append('lat', lat)
+    fd.append('lng', lng)
+
+        $.ajax({
+            type:'POST',
+            url:'/addlocation',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data.success)
+            }
+
+        })
+
+    showmodalal();
+
+}
 
 
 function b64toBlob(b64Data, contentType, sliceSize) {

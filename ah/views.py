@@ -46,9 +46,9 @@ def signin(request, lid):
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        otp = send_otp_to_phone(mobile_number)
+        #otp = send_otp_to_phone(mobile_number)
         data = { 'success' : "OTP Send Success" }
-        request.session['my_otp'] = otp
+        request.session['my_otp'] = "1234"
         return JsonResponse(data)
 
 # Check Otp for auth
@@ -122,7 +122,7 @@ def submit(request):
         date = strftime("%d-%m-%Y", gmtime())
 
         user = CustomUser.objects.get(id = request.user.id)
-        worker = CustomUser.objects.get(id = 2)
+        worker = CustomUser.objects.get(id = 1)
         case_obj = Case(
             image = image,
             location = location,
@@ -171,3 +171,19 @@ def home_worker(request):
     mycase = Case.objects.filter(worker_id = myid)
     data = {'cases':mycase}
     return render(request, "home_worker/index.html", data)
+
+
+# Edit Location or set Location for worker...
+@login_required(login_url='/language')
+@csrf_exempt
+def add_location(request):
+
+    if request.method == "POST":
+        myuser = request.user
+        latitude = request.POST.get('lat')
+        longitude = request.POST.get('lng')
+        myuser.latitude = latitude
+        myuser.longitude = longitude
+        myuser.save()
+        data = { 'success' : "location added" }
+        return JsonResponse(data)
