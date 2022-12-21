@@ -46,9 +46,9 @@ def signin(request, lid):
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        #otp = send_otp_to_phone(mobile_number)
+        otp = send_otp_to_phone(mobile_number)
         data = { 'success' : "OTP Send Success" }
-        request.session['my_otp'] = "1234"
+        request.session['my_otp'] = otp
         return JsonResponse(data)
 
 # Check Otp for auth
@@ -147,8 +147,6 @@ def complaint(request):
 
         case_id = request.POST.get('case_id')
         complaint = request.POST.get('complaint_box')
-        print(case_id)
-        print(complaint)
         date = strftime("%d-%m-%Y", gmtime())
 
         case = Case.objects.get(id = case_id)
