@@ -136,6 +136,18 @@ function retakemodal() {
 }
 
 
+function btnsolved() {
+    togglepending();
+    togglesolved();
+
+}
+
+function btnpending() {
+    togglesolved();
+    togglepending();
+
+}
+
 
 function submitcase() {
     if (link != ""){
@@ -347,6 +359,8 @@ function showWorkerPosition(position) {
         })
 
     showmodalal();
+    window.location = "/";
+
 
 }
 

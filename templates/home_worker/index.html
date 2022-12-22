@@ -59,24 +59,39 @@
 									</path>
 								</g>
 							</svg>
-							<span>Pending</span>
+							<span>Cases</span>
 						</a>
 					</li>
 
 				</button>
 
-				<button class="btnhide" onclick="togglesolved()">
+				<button class="btnhide">
 					<li>
 
 						<a>
-							<svg class="icon icon-news" viewBox="0 0 24 24" width="24" height="24">
-								<g fill="currentColor">
-									<path fill="currentColor"
-										d="M17 2h-10c-1.7 0-3 1.3-3 3v16c0 0.4 0.2 0.7 0.5 0.9s0.7 0.1 1-0.1l6.4-4.6 6.4 4.6c0.2 0.1 0.4 0.2 0.6 0.2s0.3 0 0.5-0.1c0.3-0.2 0.5-0.5 0.5-0.9v-16c0.1-1.7-1.2-3-2.9-3zM18 19.1l-5.4-3.9c-0.2-0.1-0.4-0.2-0.6-0.2s-0.4 0.1-0.6 0.2l-5.4 3.9v-14.1c0-0.6 0.4-1 1-1h10c0.6 0 1 0.4 1 1v14.1z">
-									</path>
-								</g>
+
+							<svg class="icon icon-news" width="24" height="24" viewBox="0 -1 24 24">
+							<g fill="currentColor">
+								<path fill="currentColor" 
+								d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.766L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.234V16H4V4h16v12z"></path>
+								<circle cx="15" cy="10" r="2"></circle>
+								<circle cx="9" cy="10" r="2"></circle>
+							</g>
 							</svg>
-							<span>Solved</span>
+
+						<!--								
+							<svg class="icon icon-news" width="24" height="24" viewBox="0 0 24 24">
+							<g fill="currentColor">
+								<circle cx="9.5" cy="9.5" r="1.5"></circle>
+								<circle cx="14.5" cy="9.5" r="1.5"></circle>
+								<path fill="currentColor"
+									d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.897 5.515 5 6.934V22l5.34-4.004C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8zm0 14h-.333L9 18v-2.417l-.641-.247C5.671 14.301 4 12.256 4 10c0-3.309 3.589-6 8-6s8 2.691 8 6-3.589 6-8 6z"></path>
+							</g>
+							</svg>
+
+						-->
+
+							<span>Complaint</span>
 						</a>
 					</li>
 
@@ -235,16 +250,24 @@
 	<div class="modal" id="modalpending">
 		<div class="modal-content-1">
 
-			<div class="modal-heading">
-				<wpending>Pending Cases</wpending>
+			<div class="btnrs">
+				
+			<button class="w-modal-heading1" onclick="btnsolved()">
+				<wsolved>Solved</wsolved>
+			</button>
+
+			<div class="w-modal-heading2">
+				<wpending1>Pending</wpending1>
 				<button class="btnhide2" onclick="togglepending()">
 					<svg class="svg-icon2" role="img" viewBox="0 0 512 512">
 						<path
 							d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
 					</svg>
 				</button>
-
 			</div>
+
+
+			</div>			
 
 			<div class="scrollbar" id="body-scroll">
 
@@ -303,16 +326,27 @@
 	<div class="modal" id="modalsolved">
 		<div class="modal-content-1">
 
-			<div class="modal-heading">
-				<wsolved>Solved Cases</wsolved>
-				<button class="btnhide2" onclick="togglesolved()">
+			<div class="btnrs">
+			
+
+			<div class="w-modal-heading22">
+				<wsolved1>Solved</wsolved1>
+				<button class="btnhide3" onclick="togglesolved()">
 					<svg class="svg-icon2" role="img" viewBox="0 0 512 512">
 						<path
 							d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
 					</svg>
 				</button>
-
 			</div>
+
+
+			<button class="w-modal-heading11" onclick="btnpending()">
+				<wpending>Pending</wpending>
+
+			</button>
+
+
+			</div>			
 
 			<div class="scrollbar" id="body-scroll">
 
@@ -420,6 +454,61 @@
 				<div class="btns1">
 					<a href="/language">
 						<button class="shop-now">Change Language</button>
+					</a>
+					<div class="snowflake-grid to-left">
+						<div class="snowflake-item border-bottom border-right">
+							<div class="sub-items border-right border-bottom pull-down">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-bottom border-left">
+							<div class="sub-items border-right border-bottom r-90 pull-down-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-right">
+							<div class="sub-items border-right border-bottom r-270 pull-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-left">
+							<div class="sub-items border-right border-bottom r-180 pull-left">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+					</div>
+					<div class="snowflake-grid to-right">
+						<div class="snowflake-item border-bottom border-right">
+							<div class="sub-items border-right border-bottom pull-down">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-bottom border-left">
+							<div class="sub-items border-right border-bottom r-90 pull-down-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-right">
+							<div class="sub-items border-right border-bottom r-270 pull-right">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+						<div class="snowflake-item border-top border-left">
+							<div class="sub-items border-right border-bottom r-180 pull-left">
+								<div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>	
+				
+			</div>
+
+
+			<div class="containers1">
+				<div class="btns1 btns2">
+					<a>
+						<button class="shop-now" onclick="showmodalal()">Edit Location</button>
 					</a>
 					<div class="snowflake-grid to-left">
 						<div class="snowflake-item border-bottom border-right">

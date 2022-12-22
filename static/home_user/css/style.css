@@ -212,7 +212,6 @@ p {
   box-shadow: 0px 0px 50px 20px rgba(64, 81, 84, 0.574);
   width: 90vw;
   margin: 10px;
-  height: 40vh;
   padding: 10px;
   padding-left: 15px;
   max-width: 350px;
@@ -242,17 +241,25 @@ p {
   background-image: linear-gradient(45deg, #8baaaa 0%, #ae8b9c 100%);
   cursor: pointer;
   font-size: 20px;
-  color: var(--color);
+  color: black;
   transition: all 0.3s;
   position: relative;
   text-align: center;
   overflow: hidden;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 30px 10px #313d5dcb;
+  border-radius: 1.5rem;
+  border: 1px solid;
+  border-color: rgba(46, 65, 85, 0.633);
+  box-shadow: 0px 0px 30px 5px #313d5dcb;
 }
 
 .btns1:hover {
   transform: translateX(5px) translateY(-7px);
+  color: lightcyan;
+}
+
+.btns2 {
+  background-image: linear-gradient(45deg, #8baa90 0%, #8b8bae 100%);
+  margin-bottom: 30px;
 }
 
 .hides{
