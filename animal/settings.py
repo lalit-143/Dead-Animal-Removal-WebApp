@@ -24,6 +24,10 @@ API_KEY = '6d7e7327-808b-11ed-9158-0200cd936042'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#^vf^)pzxh0kg)t3fxk0b#!x46b4)#%b4e=(=4ozlctf9h2int'
 
+CSRF_TRUSTED_ORIGINS=['https://*.animals-heaven.up.railway.app', 'http://*', 'https://*']
+CSRF_TRUSTED_ORIGINS = ALLOWED_ORIGINS.copy()
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
