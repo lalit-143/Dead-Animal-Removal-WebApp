@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(CustomUser)
 admin.site.register(Case)
 admin.site.register(Complaint)
+admin.site.register(Udid_Num)

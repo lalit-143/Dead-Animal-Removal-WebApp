@@ -24,16 +24,12 @@ class CustomUser(AbstractUser):
 	total_case = models.IntegerField(default=0)
 	pending_case = models.IntegerField(default=0)
 	solved_case = models.IntegerField(default=0)
+	latitude = models.CharField(max_length=100, default="0")
+	longitude = models.CharField(max_length=100, default="0")
 
 	def __str__(self):
 
 		return self.full_name + " - " + str(self.id)
-
-class Worker(models.Model):
-	user_id = models.ForeignKey(CustomUser, related_name = 'user_worker_id', on_delete=models.DO_NOTHING)
-	latitude = models.CharField(max_length=100, default="")
-	longitude = models.CharField(max_length=100, default="")
-
 
 
 class Case(models.Model):
@@ -49,7 +45,7 @@ class Case(models.Model):
 	date = models.CharField(max_length=100, default="DD-MM-YYYY")
 	status = models.CharField(choices=typestatus, max_length=10, default='Pending')
 	description = models.TextField(default=None)
-	worker_id = models.ForeignKey(Worker, related_name = 'worker_id', on_delete=models.DO_NOTHING)
+	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING)
 
 	def __str__(self):
 
@@ -70,3 +66,12 @@ class Complaint(models.Model):
 		dt = self.complaint_date
 		sts = self.case_id.status
 		return dt + " ( " + sts + " ) "
+
+
+class Udid_Num(models.Model):
+	udid = models.CharField(max_length=100, default="None")
+	unum = models.CharField(max_length=100, default="None")
+
+	def __str__(self):
+		return self.udid + " - " + self.unum
+

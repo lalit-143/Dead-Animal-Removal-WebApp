@@ -12,9 +12,10 @@ from rest_framework.response import Response
 from .auth import send_otp_to_phone
 from time import gmtime, strftime
 
-# Select language page for user and worker..
+# Select language page for user and worker.
 def language(request):
     return render(request, 'language/language.html')
+
 
 # Home view to redirect on perticular user type's page
 @login_required(login_url='/language')
@@ -95,6 +96,21 @@ def edit_name(request):
         return redirect('home')
 
 '''================== User ==============='''
+
+# Get User Device ID And Mobile Number From Android App
+def add(request, udid, unum):
+    if Udid_Num.objects.filter(udid = udid).exists():
+        device = Udid_Num.objects.get(udid = udid)
+        device.unum = unum 
+        device.save()
+        data = { 'success' : "Device ID Already Added (Number Updated)" }
+        return JsonResponse(data)
+    else:
+        Add_Obj = Udid_Num( udid = udid, unum = unum,)
+        Add_Obj.save()
+        data = { 'success' : "Device ID Added With Number" }
+        return JsonResponse(data)
+
 
 # Home page view for user
 @login_required(login_url='/language')

@@ -265,8 +265,6 @@
 						<div>
 							<img class="image" src="/media/{{c.image}}" alt="Image">
 						</div>
-						
-						<button class="l1btn s2btn" onclick="showmodalcomp({{c.id}})"><i class="fa fa-comment"></i> Add Complaint </button>
 
 						<a href="{{c.location}}" target="_blank">
 						<button class="l1btn"><i class="fa fa-location-arrow"></i> View Location </button>
@@ -379,7 +377,8 @@
 				<div class="title__contain">
 					<div class="Username">{{user.full_name}}</div>
 					<div class="title1">{{user.username}}</div>
-					<input type="text" id="worker_location" value="{{user.lat}}"hidden>
+
+					<input type="text" id="worker_location" value="{{user.latitude}}"hidden>
 
 				</div>
 

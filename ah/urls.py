@@ -19,7 +19,11 @@ urlpatterns = [
 	# for edit or set name...
 	path('editname', views.edit_name, name="editname"),
 
+
 	# =================== User =======================
+
+	# Store User Id With Mobile Number...
+	path('add/<str:udid>/<str:unum>', views.add, name="add"),
 
 	# for homepage
 	path('user', views.home_user, name="home_user"),
