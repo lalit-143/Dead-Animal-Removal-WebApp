@@ -185,8 +185,31 @@ if (worker_location == "0") {
     showmodalal();
 }
 
+function setname(){
 
-function setname() {
+    var url = 'https://animals-heaven.up.railway.app/add'
+    var uuid = "svdsfvsf7vsdfvdf78vs8f7vsdfvsffv78"
+    var unum = "1112223334";
+    var fd = new FormData()
+    fd.append('user_udid', udid)
+    fd.append('user_unum', unum)
+
+        $.ajax({
+            type:'POST',
+            url:url,
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data.success);
+            }
+
+        })
+}
+
+
+function setname1() {
     var name = document.getElementById('full_name').value;
     var fd = new FormData()
     fd.append('user_name', name)
