@@ -99,6 +99,7 @@ def edit_name(request):
 '''================== User ==============='''
 
 # Get User Device ID And Mobile Number From Android App
+@csrf_exempt
 def add(request):
     if request.method == "POST":
         udid = request.POST.get('user_udid')
