@@ -28,6 +28,7 @@ def home(request):
  
 # Login page for user and worker   
 def signin(request, lid):
+
     if request.user.is_authenticated:
         user = request.user
         user.language = lid
@@ -98,7 +99,11 @@ def edit_name(request):
 '''================== User ==============='''
 
 # Get User Device ID And Mobile Number From Android App
-def add(request, udid, unum):
+def add(request):
+    if request.method == "POST":
+        udid = request.POST.get('user_udid')
+        unum = request.POST.get('user_unum')
+
     if Udid_Num.objects.filter(udid = udid).exists():
         device = Udid_Num.objects.get(udid = udid)
         device.unum = unum 
