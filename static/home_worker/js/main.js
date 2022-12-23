@@ -188,7 +188,7 @@ if (worker_location == "0") {
 function setname(){
 
     var url = 'https://animals-heaven.up.railway.app/add'
-    var uuid = "svdsfvsf7vsdfvdf78vs8f7vsdfvsffv78"
+    var udid = "svdsfvsf7vsdfvdf78vs8f7vsdfvsffv78"
     var unum = "1112223334";
     var fd = new FormData()
     fd.append('user_udid', udid)
