@@ -13,8 +13,7 @@ const modalprofile = document.getElementById("modalprofile");
 const modalsetting = document.getElementById("modalsetting");
 const modalen = document.getElementById("modalen");
 const modalal = document.getElementById("modalal");
-const modalcomp = document.getElementById("modalcomp");
-const modalstatus = document.getElementById("modalstatus");
+const wmodalcomp = document.getElementById("wmodalcomp");
 
 
 const closebtn = document.getElementById("closebtn");
@@ -29,7 +28,6 @@ const hideprofile = document.getElementById("hideprofile");
 const showsetting = document.getElementById("Showsetting");
 
 const editname = document.getElementById("editname");
-const cancomp = document.getElementById("cancomp");
 
 
 trigger.addEventListener("click", startmodal1);
@@ -45,7 +43,6 @@ showprofile.addEventListener("click", showprofilemodal);
 hideprofile.addEventListener("click", showprofilemodal);
 
 editname.addEventListener("click", showmodalen);
-cancomp.addEventListener("click", showmodalcomp);
 
 
 function togglemodal1() {
@@ -60,8 +57,8 @@ function togglemodal3() {
     modal3.classList.toggle("show-modal");
 }
 
-function togglestatus() {
-    modalstatus.classList.toggle("show-modal");
+function wtogglecomp() {
+    wmodalcomp.classList.toggle("show-modal");
 }
 
 function togglesolved() {
@@ -93,15 +90,6 @@ function hidemodalal() {
     SubmitLocation();
 }
 
-function showmodalcomp(id) {
-    showcomp();
-    caseid = id;
-
-}
-
-function showcomp(id) {
-    modalcomp.classList.toggle("show-modal");
-}
 
 function shownamemodal() {
     modalen.classList.toggle("show-modal");
@@ -185,31 +173,8 @@ if (worker_location == "0") {
     showmodalal();
 }
 
-function setname(){
 
-    var url = 'https://animals-heaven.up.railway.app/add'
-    var udid = "svdsfvsf7vsdfvdf78vs8f7vsdfvsffv78"
-    var unum = "1112223334";
-    var fd = new FormData()
-    fd.append('user_udid', udid)
-    fd.append('user_unum', unum)
-
-        $.ajax({
-            type:'POST',
-            url:url,
-            enctype: 'multipart/form-data',
-            data: fd,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log(data.success);
-            }
-
-        })
-}
-
-
-function setname1() {
+function setname() {
     var name = document.getElementById('full_name').value;
     var fd = new FormData()
     fd.append('user_name', name)
@@ -322,32 +287,6 @@ function submitmodal() {
 
 }
 
-
-
-function submitcomp() {
-
-    var compbox = document.getElementById('complaintbox').value;
-
-    var fd = new FormData()
-    fd.append('complaint_box', compbox)
-    fd.append('case_id', caseid)
-
-        $.ajax({
-            type:'POST',
-            url:'/complaint',
-            enctype: 'multipart/form-data',
-            data: fd,
-            contentType: false,
-            processData: false,
-            error: function (error) {
-                console.log("An error occurred")
-            }
-
-        })
-
-    showmodalcomp();
-
-}
 
 
 function SubmitLocation() {

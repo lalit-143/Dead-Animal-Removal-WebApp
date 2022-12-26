@@ -65,7 +65,7 @@
 
 				</button>
 
-				<button class="btnhide">
+				<button class="btnhide" onclick="wtogglecomp()">
 					<li>
 
 						<a>
@@ -78,18 +78,6 @@
 								<circle cx="9" cy="10" r="2"></circle>
 							</g>
 							</svg>
-
-						<!--								
-							<svg class="icon icon-news" width="24" height="24" viewBox="0 0 24 24">
-							<g fill="currentColor">
-								<circle cx="9.5" cy="9.5" r="1.5"></circle>
-								<circle cx="14.5" cy="9.5" r="1.5"></circle>
-								<path fill="currentColor"
-									d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.897 5.515 5 6.934V22l5.34-4.004C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8zm0 14h-.333L9 18v-2.417l-.641-.247C5.671 14.301 4 12.256 4 10c0-3.309 3.589-6 8-6s8 2.691 8 6-3.589 6-8 6z"></path>
-							</g>
-							</svg>
-
-						-->
 
 							<span>Complaint</span>
 						</a>
@@ -398,6 +386,59 @@
 
 	</div>
 	</div>
+
+
+
+	<div class="modal" id="wmodalcomp">
+		<div class="modal-content-comp">
+
+			<div class="modal-heading-comp">
+				Complaints
+				<button class="btnhide2" id="hidestatus" onclick="wtogglecomp()">
+					<svg class="svg-icon2" role="img" viewBox="0 0 512 512">
+						<path
+							d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
+					</svg>
+				</button>
+
+			</div>
+
+			<div class="scrollbar" id="body-scroll">
+
+				<div class="card-body">
+
+					{% for c in complaints %}
+
+					<button type="button" class="collapsible-comp collapsible1">
+
+						<ws1> {{c.complaint_date}} </ws1>
+
+						<ws2>( Case ID - {{c.case_id.id}} )</ws2>
+
+					</button>
+
+					<div class="content1-comp">
+
+						<div class="wtext">
+
+				<descr2-comp>{{c.complaint_box}}</descr2-comp>
+
+			</div>
+
+								
+					</div>
+
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+
 
 	<div id="modalprofile" class="profilemodal">
 		<div class="profilecontent">

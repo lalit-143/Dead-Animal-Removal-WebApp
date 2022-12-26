@@ -56,8 +56,8 @@ class Case(models.Model):
 
 
 class Complaint(models.Model):
-
-	case_id = models.ForeignKey(Case, on_delete=models.CASCADE)
+	worker_id = models.ForeignKey(CustomUser, related_name='case_worker_id', on_delete=models.CASCADE)
+	case_id = models.ForeignKey(Case, related_name='case_id', on_delete=models.CASCADE)
 	complaint_date = models.CharField(max_length=100, default="DD-MM-YYYY")
 	complaint_box = models.TextField(default=None)
 

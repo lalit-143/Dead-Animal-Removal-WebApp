@@ -311,6 +311,19 @@
   border-radius: 1.2rem;
 }
 
+
+.wtext{
+  font-family: "Mulish", sans-serif;
+  width: 90%;
+  margin: 10px auto 10px auto;
+  padding: 15px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  border-color: rgba(34, 35, 68, 0.452);
+  border-radius: 1.2rem;
+}
+
 wltext{
   color: rgb(187, 217, 219);
 }

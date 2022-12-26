@@ -172,10 +172,12 @@ def complaint(request):
         date = strftime("%d-%m-%Y", gmtime())
 
         case = Case.objects.get(id = case_id)
+        worker = case.worker_id
 
         comp_obj = Complaint(
             case_id = case,
             complaint_box = complaint,
+            worker_id = worker,
             complaint_date = date, )
 
         comp_obj.save()
@@ -191,7 +193,8 @@ def complaint(request):
 def home_worker(request):
     myid = request.user.id
     mycase = Case.objects.filter(worker_id = myid)
-    data = {'cases':mycase}
+    mycomplaint = Complaint.objects.filter(worker_id = myid)
+    data = {'cases':mycase, 'complaints':mycomplaint,}
     return render(request, "home_worker/index.html", data)
 
 

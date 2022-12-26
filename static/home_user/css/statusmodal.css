@@ -9,6 +9,20 @@
   max-width: 350px;
 }
 
+
+.modal-content-comp {
+  margin: 10px;
+  padding-bottom: 10px;
+  background-image: linear-gradient(-225deg, #adcec5e0 0%, #d5b1cee3 100%);
+  border: 2px solid rgba(65, 70, 84, 0.823);
+  box-shadow: 1px 1px 30px 10px rgba(57, 29, 56, 0.574);
+  border-radius: 2rem;
+  width: 90vw;
+  max-width: 350px;
+  max-height: 600px;
+}
+
+
 .card-body {
   margin-left: 10px;
   padding-right: 10px;
@@ -32,6 +46,27 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+
+.modal-heading-comp{
+  margin-top: 20px;
+  top: 5%;
+  position: relative;
+  left: 50%;
+  padding: 8px;
+  transform: translate(-50%,-50%);
+  text-decoration: none;
+  color:rgb(0, 0, 0);
+  background: linear-gradient(90deg, #d79f98cb, #d9d09ece, #bbdda0c6);
+  border: 2px solid rgba(67, 49, 63, 0.63);
+  box-shadow: 0px 0px 30px 5px rgba(46, 78, 102, 0.574);
+  border-radius: 1.5rem;
+  text-align: center;
+  width: 70%;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 
 
 .w-modal-heading1{
@@ -226,6 +261,13 @@ descr2 {
   font-weight: 300;
 }  
 
+descr2-comp {
+  color: rgb(49, 49, 49);
+  font-weight: 500;
+  font-size: 17px;
+}  
+
+
 s1 {
   color: rgb(0, 0, 0);
   font-weight: 500;
@@ -355,12 +397,46 @@ ws2:hover {
 }
 
 
+.collapsible-comp {
+  max-width: 330px;
+  margin-top: 10px;
+  background-image: linear-gradient(-225deg, #9c7489d8 27%, #5c6986db 74%);
+  border: 1px solid rgba(98, 96, 50, 0.63);
+  color: #ebeef4;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+
+}
+
+.active, .collapsible1-comp:hover {
+  background-color: #4e839ed5;
+  color: rgb(255, 255, 255);
+}
+
 .content1 {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   text-align: center;
   padding-top: 5px;
   background-color: #d0baf546;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+
+.content1-comp {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  text-align: center;
+  padding-top: 5px; 
+  background-color: #e6d1be7c;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out;
