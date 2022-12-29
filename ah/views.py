@@ -1,4 +1,5 @@
 import random
+import re
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -51,6 +52,7 @@ def send_otp(request):
         mobile_number = request.POST.get('mobile_num')
         #otp = send_otp_to_phone(mobile_number)
         data = { 'success' : "OTP Send Success" }
+        request.session['my_num'] = mobile_number
         request.session['my_otp'] = "1234"
         return JsonResponse(data)
 
@@ -59,9 +61,14 @@ def send_otp(request):
 def verify_otp(request):
     if request.method == "POST":
     
-        mobile_number = request.POST.get('receive_num')
         r_otp = request.POST.get('receive_otp')
         s_otp = request.session.get('my_otp', '4747')
+        mobile_number = request.session.get('my_num', '0')
+
+        r=re.fullmatch('[6-9][0-9]{9}',mobile_number)
+        if r == None:
+            data = { 'valid' : "Mobile Number Invalid" } 
+            return JsonResponse(data)
 
 
         if s_otp == r_otp:
