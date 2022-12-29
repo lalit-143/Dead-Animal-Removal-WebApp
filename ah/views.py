@@ -63,13 +63,7 @@ def verify_otp(request):
     
         r_otp = request.POST.get('receive_otp')
         s_otp = request.session.get('my_otp', '4747')
-        mobile_number = request.session.get('my_num', '0')
-
-        r=re.fullmatch('[6-9][0-9]{9}',mobile_number)
-        if r == None:
-            data = { 'valid' : "Mobile Number Invalid" } 
-            return JsonResponse(data)
-
+        mobile_number = request.session.get('my_num', '1122334455')
 
         if s_otp == r_otp:
 

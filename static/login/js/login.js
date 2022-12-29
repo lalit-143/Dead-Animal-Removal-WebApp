@@ -83,9 +83,11 @@ function checkmodal() {
             success: function (data) {
                 if (data.valid) {
                     message2.classList.add('hidden');
+                    console.log(data.valid);
                     window.location = "/";
                 }
                 else{
+                    console.log(data.invalid);
                     message2.classList.remove('hidden');
                 }
             },
