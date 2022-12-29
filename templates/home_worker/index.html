@@ -196,8 +196,50 @@
 						Retake
 					</button>
 
-					<button class="c4btn" id="submitbtn">
+					<button class="c4btn" id="wnextbtn">
 
+						Next
+						<svg class="svg-icon" role="img" viewBox="0 0 24 24" >
+							<path d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"></path>
+						</svg>
+
+					</button>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="modal" id="wmodal3">
+		<div class="wmodal3-content">
+
+			<div class="align-content-center">
+				
+				<h1 class="wsfont">Submit On The Case Below</h1>
+
+				<button class="wcbtn"> 
+					<ws1 id="case_date"> </ws1> <ws2 id="case_id"></ws2>
+				</button>
+
+				<div class="btnrs">	
+
+					<button class="c1btn" onclick="togglewmodal3()">
+
+						<svg class="svg-icon" role="img" viewBox="0 0 512 512">
+							<path
+								d="M256,33C132.3,33,32,133.3,32,257c0,123.7,100.3,224,224,224c123.7,0,224-100.3,224-224C480,133.3,379.7,33,256,33z    M364.3,332.5c1.5,1.5,2.3,3.5,2.3,5.6c0,2.1-0.8,4.2-2.3,5.6l-21.6,21.7c-1.6,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3L256,289.8   l-75.4,75.7c-1.5,1.6-3.6,2.3-5.6,2.3c-2,0-4.1-0.8-5.6-2.3l-21.6-21.7c-1.5-1.5-2.3-3.5-2.3-5.6c0-2.1,0.8-4.2,2.3-5.6l75.7-76   l-75.9-75c-3.1-3.1-3.1-8.2,0-11.3l21.6-21.7c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l75.7,74.7l75.7-74.7   c1.5-1.5,3.5-2.3,5.6-2.3c2.1,0,4.1,0.8,5.6,2.3l21.6,21.7c3.1,3.1,3.1,8.2,0,11.3l-75.9,75L364.3,332.5z" />
+						</svg>
+
+						Cancle
+					</button>
+
+					<button class="c4btn" onclick="submitcase()">
 						Submit
 						<svg class="svg-icon" role="img" viewBox="0 0 24 24" >
 							<path d="m21.426 11.095-17-8A.999.999 0 0 0 3.03 4.242L4.969 12 3.03 19.758a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81zM5.481 18.197l.839-3.357L12 12 6.32 9.16l-.839-3.357L18.651 12l-13.17 6.197z"></path>
@@ -212,16 +254,20 @@
 	</div>
 
 
+
+
+
+
 	<div class="modal" id="modal3">
 		<div class="modal3-content">
 
 			<div class="thanks2">
 
-				<p class="t1"> Thanks! </p>
+				<p class="t1 t6"> Well Done! </p>
 
-				<p class="t2"> Your Report Has Been Submited </p>
+				<p class="t2 t5"> Your Report Has Been Submited </p>
 
-				<p class="t3"> We Are Working Soon </p>
+				<p class="t3 t4"> The Status Of This Case Has Been Set From Pending To Solved </p>
 
 			</div>
 
@@ -271,13 +317,22 @@
 						<ws2>( Case ID - {{c.id}} )</ws2>
 
 					</button>
-					<div class="content1">
+
+
+					{% if c.accept == 0 %}
+
+
+					<div class="content0 content11">
+
+						<button class="wrbtn"> Reject </button>
+
+						<button class="wabtn" onclick="caseaccept({{c.id}})"> Accept </button>
 
 						<div>
 							<img class="image" src="/media/{{c.image}}" alt="Image">
 						</div>
 
-						<a href="{{c.location}}" target="_blank">
+						<a href="https://www.google.com/maps?q={{c.lat}},{{c.lng}}" target="_blank">
 						<button class="l1btn"><i class="fa fa-location-arrow"></i> View Location </button>
 						</a>
 
@@ -295,6 +350,41 @@
 						{% endif %}
 
 					</div>
+
+					{% endif %}
+
+
+					{% if c.accept == 1 %}
+
+					<div class="content1 content0">
+
+						<div>
+							<img class="image" src="/media/{{c.image}}" alt="Image">
+						</div>
+
+						<a href="https://www.google.com/maps?q={{c.lat}},{{c.lng}}" target="_blank">
+						<button class="l1btn"><i class="fa fa-location-arrow"></i> View Location </button>
+						</a>
+
+
+						{% if c.description != 'None' %}
+
+						<div>
+							<button class="description1">
+								<descr> Description </descr>
+								</br>
+								<descr2>{{c.description}}</descr2>
+							</button>
+						</div>
+
+						{% endif %}
+
+						<button class="wrbtn2"> Reject </button>
+
+					</div>
+
+					{% endif %}
+
 
 						{% endif %}
 
@@ -356,7 +446,7 @@
 							<img class="image" src="/media/{{c.image}}" alt="Image">
 						</div>
 
-						<a href="{{c.location}}" target="_blank">
+						<a href="https://www.google.com/maps?q={{c.lat}},{{c.lng}}" target="_blank">
 						<button class="l1btn"><i class="fa fa-location-arrow"></i> View Location </button>
 						</a>
 

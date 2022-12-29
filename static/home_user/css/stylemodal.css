@@ -350,7 +350,7 @@ button:active {
 
 .t1 {
   font-family: "Exo", sans-serif;
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 900;
   margin: auto;
   text-transform: uppercase;
@@ -381,7 +381,7 @@ button:active {
   font-family: "Exo", sans-serif;
   font-weight: 700;
   padding-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
   margin: auto;
   text-transform: uppercase;
   background: linear-gradient(45deg, 
@@ -412,7 +412,7 @@ button:active {
   font-weight: 500;
   padding-top: 18px;
   padding-bottom: 10px;
-  font-size: 20px;
+  font-size: 16px;
   margin: auto;
   text-transform: uppercase;
   background: linear-gradient(-45deg, 
@@ -428,6 +428,18 @@ button:active {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.t4 {
+  font-size: 13px;
+}
+
+.t5 {
+  font-size: 18px;
+}
+
+.t6 {
+  font-size: 25px;
 }
 
 :root {

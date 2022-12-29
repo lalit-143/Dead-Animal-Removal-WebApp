@@ -130,7 +130,7 @@ function retakemodal() {
 
 
 function submitcase() {
-    if (link != ""){
+    if (lng != ""){
         submitmodal();
     }
 }
@@ -150,7 +150,8 @@ function windowOnClick(event) {
 window.addEventListener("click", windowOnClick);
 
 var photo;
-var link = "";
+var lng = "";
+var lat = "";
 var caseid;
 var name = document.getElementById('full_name').value;
 
@@ -231,9 +232,8 @@ function getLocation() {
 
 function showPosition(position) {
 
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    link = "https://www.google.com/maps?q=" + lat + "," + lng;
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
     lbtn2.classList.remove('lbtn2');     
     message2.classList.add('hidden');   
     message1.classList.remove('hidden');
@@ -258,7 +258,8 @@ function submitmodal() {
 
     var fd = new FormData()
     fd.append('image', blob)
-    fd.append('location', link)
+    fd.append('lng', lng)
+    fd.append('lat', lat)
     fd.append('description', descriptionbox)
 
         $.ajax({

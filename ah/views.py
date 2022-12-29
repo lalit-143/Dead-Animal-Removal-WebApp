@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .auth import send_otp_to_phone
 from time import gmtime, strftime
+from geopy.distance import geodesic as GD
 
 # Select language page for user and worker.
 def language(request):
@@ -139,15 +140,17 @@ def home_user(request):
 def submit(request):
     if request.method == "POST":
         image = request.FILES.get('image')
-        location = request.POST.get('location')
+        lng = request.POST.get('lng')
+        lat = request.POST.get('lat')
         description = request.POST.get('description')
         date = strftime("%d-%m-%Y", gmtime())
-
         user = CustomUser.objects.get(id = request.user.id)
-        worker = CustomUser.objects.get(id = 1)
+        nearest_worker_id = getmin(lng, lat)
+        worker = CustomUser.objects.get(id = nearest_worker_id)
         case_obj = Case(
             image = image,
-            location = location,
+            lng = lng,
+            lat = lat,
             user_id = user,
             worker_id = worker,
             description = description,
@@ -160,6 +163,25 @@ def submit(request):
         return JsonResponse(data)
 
     return render(request, "home_user/index.html")
+
+def getmin(lng, lat):
+    distance = 0
+    workers = CustomUser.objects.filter(user_type = '2')
+    fworker = CustomUser.objects.get(id = 2)
+    clat_lng = ( lng, lat)
+    flat_lng = ( fworker.longitude, fworker.latitude)
+    fdist = GD(clat_lng, flat_lng).km  
+    nworker = fworker.id
+
+    for w in workers:
+        wlat_lng = ( w.longitude, w.latitude )
+        distance = GD(clat_lng, wlat_lng).km
+        if distance < fdist:
+            fdist = distance 
+            nworker = w.id
+
+    return nworker
+
 
 # add complaint to pending case...
 @login_required(login_url='/language')
@@ -193,8 +215,9 @@ def complaint(request):
 def home_worker(request):
     myid = request.user.id
     mycase = Case.objects.filter(worker_id = myid)
-    mycomplaint = Complaint.objects.filter(worker_id = myid)
-    data = {'cases':mycase, 'complaints':mycomplaint,}
+    mycomplaint = Complaint.objects.filter(worker_id = myid).order_by('-id')
+    accepted_case = Case.objects.filter(worker_id = myid, accept=1)
+    data = {'cases':mycase, 'complaints':mycomplaint, 'scases':accepted_case}
     return render(request, "home_worker/index.html", data)
 
 
@@ -212,3 +235,56 @@ def add_location(request):
         myuser.save()
         data = { 'success' : "location added" }
         return JsonResponse(data)
+
+
+@login_required(login_url='/language')
+@csrf_exempt
+def case_accept(request):
+
+    if request.method == "POST":
+        cid = request.POST.get('case_id')
+        case = Case.objects.get(id = cid)
+        case.accept = 1
+        case.save()
+        data = { 'success' : "case accepted" }
+        return JsonResponse(data)
+
+
+
+@login_required(login_url='/language')
+@csrf_exempt
+def case_near(request):
+
+    if request.method == "POST":
+        myid = request.user.id
+        longitude = request.POST.get('lng')
+        latitude = request.POST.get('lat')
+        accepted_case = Case.objects.filter(worker_id = myid, accept=1)
+        ncase_id = 2
+        ncase_date = strftime("%d-%m-%Y", gmtime())
+
+        data = { 'id' : ncase_id, 'date':ncase_date }
+        return JsonResponse(data)
+
+# Submit case...
+@login_required(login_url='/language')
+@csrf_exempt
+def worker_submit(request):
+    if request.method == "POST":
+        user = request.user
+        case_id = int(request.POST.get('cid'))
+        image = request.FILES.get('image')
+        date = strftime("%d-%m-%Y", gmtime())
+        case = Case.objects.get(id = case_id)
+        case.image = image
+        case.date = date
+        case.status = "Solved"
+        case.accept = 0
+        user.pending_case -= 1
+        user.solved_case += 1
+        user.save()
+        case.save()
+        data = { 'success' : "Case Submited" }
+        return JsonResponse(data)
+
+    return render(request, "home_user/index.html")

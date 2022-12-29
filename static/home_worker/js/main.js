@@ -7,6 +7,7 @@ const trigger = document.getElementById("trigger");
 const modal1 = document.getElementById("modal1");
 const modal2 = document.getElementById("modal2");
 const modal3 = document.getElementById("modal3");
+const wmodal3 = document.getElementById("wmodal3");
 const modalsolved = document.getElementById("modalsolved");
 const modalpending = document.getElementById("modalpending");
 const modalprofile = document.getElementById("modalprofile");
@@ -19,7 +20,8 @@ const wmodalcomp = document.getElementById("wmodalcomp");
 const closebtn = document.getElementById("closebtn");
 const clickbtn = document.getElementById("clickbtn");
 const retakebtn = document.getElementById("retakebtn");
-const submitbtn = document.getElementById("submitbtn");
+
+const wnextbtn = document.getElementById("wnextbtn");
 const finishbtn = document.getElementById("finishbtn");
 
 const showprofile = document.getElementById("ShowProfile");
@@ -29,13 +31,12 @@ const showsetting = document.getElementById("Showsetting");
 
 const editname = document.getElementById("editname");
 
-
 trigger.addEventListener("click", startmodal1);
 closebtn.addEventListener("click", closemodal);
 clickbtn.addEventListener("click", closepic);
 retakebtn.addEventListener("click", retakemodal);
 
-submitbtn.addEventListener("click", submitcase);
+wnextbtn.addEventListener("click", wselectcase);
 finishbtn.addEventListener("click", finishmodal);
 
 showsetting.addEventListener("click", showsettingmodal);
@@ -44,13 +45,17 @@ hideprofile.addEventListener("click", showprofilemodal);
 
 editname.addEventListener("click", showmodalen);
 
-
 function togglemodal1() {
     modal1.classList.toggle("show-modal");
 }
 
 function togglemodal2() {
     modal2.classList.toggle("show-modal");
+}
+
+
+function togglewmodal3() {
+    wmodal3.classList.toggle("show-modal");
 }
 
 function togglemodal3() {
@@ -138,10 +143,9 @@ function btnpending() {
 
 
 function submitcase() {
-    if (link != ""){
-        submitmodal();
-    }
+    submitmodal();
 }
+
 
 function finishmodal() {
     togglemodal3();
@@ -154,12 +158,45 @@ function windowOnClick(event) {
     }
 }
 
-
 window.addEventListener("click", windowOnClick);
 
+
+function wselectcase() {
+    if (lat != ""){ 
+
+
+    var fd = new FormData()
+    fd.append('lat', lat)
+    fd.append('lng', lng)
+
+        $.ajax({
+            type:'POST',
+            url:'/casenear',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                cid = data.id
+                casedate = data.date;
+                caseid = " ( Case ID - " + cid + " ) ";
+                document.getElementById("case_date").innerHTML = casedate;
+                document.getElementById("case_id").innerHTML = caseid;
+                togglemodal2()
+                togglewmodal3()
+            }
+
+        })
+    }
+
+}
+
+var cid;
 var photo;
-var link = "";
 var caseid;
+var casedate;
+var lng = "";
+var lat = "";
 var name = document.getElementById('full_name').value;
 var worker_location = document.getElementById('worker_location').value;
 
@@ -246,29 +283,26 @@ function getLocation() {
 
 function showPosition(position) {
 
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    link = "https://www.google.com/maps?q=" + lat + "," + lng;
-    lbtn2.classList.remove('lbtn2');     
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    lbtn2.classList.remove('lbtn2');    
     message2.classList.add('hidden');   
     message1.classList.remove('hidden');
 }
 
 
 function submitmodal() {
-    togglemodal2();
 
     var ImageURL = photo;
     var block = ImageURL.split(";");
     var contentType = block[0].split(":")[1];
     var realData = block[1].split(",")[1];
 
-    var blob = b64toBlob(realData, contentType)
-
+    var blob = b64toBlob(realData, contentType);
 
     var fd = new FormData()
+    fd.append('cid', cid)
     fd.append('image', blob)
-    fd.append('location', link)
 
         $.ajax({
             type:'POST',
@@ -278,12 +312,16 @@ function submitmodal() {
             contentType: false,
             processData: false,
             error: function (error) {
-                console.log("An error occurred")
+                console.log("An error occurred");
+            },
+            success: function (error) {
+                console.log("Case Submited");
+                togglewmodal3();
+                togglemodal3();
             }
 
         })
 
-    togglemodal3();
 
 }
 
@@ -350,4 +388,25 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 
     var blob = new Blob(byteArrays, {type: contentType});
     return blob;
+}
+
+
+
+function caseaccept(case_id) {
+    var fd = new FormData()
+    fd.append('case_id', case_id)
+
+    $.ajax({
+            type:'POST',
+            url:'/caseaccept',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data.success)
+            }
+        })
+
+    window.location = "/";
 }

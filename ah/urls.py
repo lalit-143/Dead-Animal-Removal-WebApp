@@ -19,7 +19,6 @@ urlpatterns = [
 	# for edit or set name...
 	path('editname', views.edit_name, name="editname"),
 
-
 	# =================== User =======================
 
 	# Store User Id With Mobile Number...
@@ -36,9 +35,15 @@ urlpatterns = [
 
 	# ================== Worker ======================
 
+	# for homepage
 	path('worker', views.home_worker, name="home_worker"),
 
 	# for Add Location of worker
 	path('addlocation', views.add_location, name="add_location"),
 
+	path('caseaccept', views.case_accept, name="case_accept"),
+
+	path('casenear', views.case_near, name="case_near"),
+
+	path('worker/submit', views.worker_submit, name="worker_submit"),
 ]

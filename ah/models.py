@@ -39,13 +39,15 @@ class Case(models.Model):
 		('Pending','Pending'),
 	)
 
-	user_id = models.ForeignKey(CustomUser, related_name = 'user_id', on_delete=models.DO_NOTHING)
+	user_id = models.ForeignKey(CustomUser, related_name = 'user_id', on_delete=models.CASCADE)
 	image = models.ImageField(upload_to = 'img')
-	location = models.CharField(max_length=500, default=None)
+	lng = models.CharField(max_length=100, default=None)
+	lat = models.CharField(max_length=100, default=None)
 	date = models.CharField(max_length=100, default="DD-MM-YYYY")
 	status = models.CharField(choices=typestatus, max_length=10, default='Pending')
 	description = models.TextField(default=None)
 	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING)
+	accept = models.IntegerField(default=0)
 
 	def __str__(self):
 
