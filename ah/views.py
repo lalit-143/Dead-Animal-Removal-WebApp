@@ -62,8 +62,8 @@ def verify_otp(request):
     if request.method == "POST":
     
         r_otp = request.POST.get('receive_otp')
-        s_otp = request.session.get('my_otp', '4747')
-        mobile_number = request.session.get('my_num', '1122334455')
+        s_otp = request.session.get('my_otp', '0')
+        mobile_number = request.session.get('my_num', '0')
 
         if s_otp == r_otp:
 
@@ -178,7 +178,8 @@ def getmin(lng, lat):
         wlat_lng = ( w.longitude, w.latitude )
         distance = GD(clat_lng, wlat_lng).km
         if distance < fdist:
-            fdist = distance 
+            fdist = distance
+            print(fdist)
             nworker = w.id
 
     return nworker
