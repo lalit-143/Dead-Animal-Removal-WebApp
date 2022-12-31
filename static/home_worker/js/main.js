@@ -177,6 +177,10 @@ function wselectcase() {
             contentType: false,
             processData: false,
             success: function (data) {
+                if (data.msg) {
+                    console.log(data.msg);
+                }
+                else {
                 cid = data.id
                 casedate = data.date;
                 caseid = " ( Case ID - " + cid + " ) ";
@@ -184,6 +188,8 @@ function wselectcase() {
                 document.getElementById("case_id").innerHTML = caseid;
                 togglemodal2()
                 togglewmodal3()
+                }
+
             }
 
         })
@@ -404,9 +410,31 @@ function caseaccept(case_id) {
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data.success)
+                console.log(data.msg)
             }
         })
 
     window.location = "/";
+}
+
+
+
+function rejectcase(r_cid) {
+
+    var fd = new FormData()
+    fd.append('cid', r_cid)
+
+        $.ajax({
+            type:'POST',
+            url:'/worker/rejectcase',
+            enctype: 'multipart/form-data',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data.msg)
+                window.location = "/";
+            }
+
+        })
 }

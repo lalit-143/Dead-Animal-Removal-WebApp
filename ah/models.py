@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import datetime
+from django_mysql.models import ListTextField
+from django.db.models import IntegerField, Model
 
 # Create your models here.
 
@@ -48,6 +50,7 @@ class Case(models.Model):
 	description = models.TextField(default=None)
 	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING)
 	accept = models.IntegerField(default=0)
+	rejected_list = ListTextField(base_field=IntegerField(), size=100,)
 
 	def __str__(self):
 
@@ -76,4 +79,12 @@ class Udid_Num(models.Model):
 
 	def __str__(self):
 		return self.udid + " - " + self.unum
+
+
+
+class Worker(models.Model):
+	mobile_number = models.CharField(max_length=100, default="None")
+
+	def __str__(self):
+		return self.mobile_number
 

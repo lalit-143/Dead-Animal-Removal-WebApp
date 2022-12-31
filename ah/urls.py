@@ -46,4 +46,13 @@ urlpatterns = [
 	path('casenear', views.case_near, name="case_near"),
 
 	path('worker/submit', views.worker_submit, name="worker_submit"),
+
+	path('worker/rejectcase', views.reject_case, name="reject_case"),
+
+
+	# ================== Admin ======================
+
+	path('addworker', views.add_worker, name="add_worker"),
+
+
 ]

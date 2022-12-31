@@ -78,3 +78,5 @@ function animate() {
 }
 
 animate();
+
+Bridge.calledFromJS();

@@ -12,7 +12,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .auth import send_otp_to_phone
 from time import gmtime, strftime
-from geopy.distance import geodesic as GD
+import simplejson as json
+from math import radians, cos, sin, asin, sqrt
 
 # Select language page for user and worker.
 def language(request):
@@ -73,6 +74,8 @@ def verify_otp(request):
             else:
                 user = CustomUser( username = mobile_number,)
                 user.set_password(mobile_number)
+                if Worker.objects.filter(mobile_number = mobile_number).exists():
+                    user.user_type = '2'
                 user.is_active = True
                 user.save()
                 user = authenticate(username=mobile_number, password=mobile_number)
@@ -146,7 +149,7 @@ def submit(request):
         description = request.POST.get('description')
         date = strftime("%d-%m-%Y", gmtime())
         user = CustomUser.objects.get(id = request.user.id)
-        nearest_worker_id = getmin(lng, lat)
+        nearest_worker_id = get_nearest_worker(lng, lat)
         worker = CustomUser.objects.get(id = nearest_worker_id)
         case_obj = Case(
             image = image,
@@ -155,7 +158,8 @@ def submit(request):
             user_id = user,
             worker_id = worker,
             description = description,
-            date = date, )
+            date = date,
+            rejected_list = [0], )
         user.total_case += 1
         user.pending_case += 1
         user.save() 
@@ -165,25 +169,37 @@ def submit(request):
 
     return render(request, "home_user/index.html")
 
-def getmin(lng, lat):
+def get_nearest_worker(lng, lat):
     distance = 0
     workers = CustomUser.objects.filter(user_type = '2')
-    fworker = CustomUser.objects.get(id = 2)
-    clat_lng = ( lng, lat)
-    flat_lng = ( fworker.longitude, fworker.latitude)
-    fdist = GD(clat_lng, flat_lng).km  
+    fworker = workers[0]
+    fdist = getdist(lat, fworker.latitude, lng, fworker.longitude)
     nworker = fworker.id
 
     for w in workers:
-        wlat_lng = ( w.longitude, w.latitude )
-        distance = GD(clat_lng, wlat_lng).km
+        print(w.id)
+        distance = getdist(lat, w.latitude, lng, w.longitude)
+        print(distance)
         if distance < fdist:
             fdist = distance
-            print(fdist)
             nworker = w.id
 
     return nworker
 
+
+def getdist(lat1, lat2, lon1, lon2):
+    lon1 = radians(float(lon1))
+    lon2 = radians(float(lon2))
+    lat1 = radians(float(lat1))
+    lat2 = radians(float(lat2))
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * asin(sqrt(a))
+    r = 6371
+    dist = c * r
+    return dist
+     
 
 # add complaint to pending case...
 @login_required(login_url='/language')
@@ -248,7 +264,7 @@ def case_accept(request):
         case = Case.objects.get(id = cid)
         case.accept = 1
         case.save()
-        data = { 'success' : "case accepted" }
+        data = { 'msg' : "case accepted" }
         return JsonResponse(data)
 
 
@@ -259,14 +275,36 @@ def case_near(request):
 
     if request.method == "POST":
         myid = request.user.id
-        longitude = request.POST.get('lng')
-        latitude = request.POST.get('lat')
-        accepted_case = Case.objects.filter(worker_id = myid, accept=1)
-        ncase_id = 2
-        ncase_date = strftime("%d-%m-%Y", gmtime())
-
+        lng = request.POST.get('lng')
+        lat = request.POST.get('lat')
+        ncase_id = get_nearest_case(lng, lat, myid)
+        if ncase_id == 0:
+            data = { 'msg' : "There Are No Accepted Case..." }
+            return JsonResponse(data)
+        ncase = Case.objects.get(id = ncase_id)
+        ncase_date = ncase.date
         data = { 'id' : ncase_id, 'date':ncase_date }
         return JsonResponse(data)
+
+def get_nearest_case(lng, lat, myid):
+    distance = 0
+    accepted_cases = Case.objects.filter(worker_id = myid, accept=1).count()
+    if accepted_cases == 0:
+        return 0
+    accepted_cases = Case.objects.filter(worker_id = myid, accept=1)
+    fcase = accepted_cases[0]
+    fdist = getdist(lat, fcase.lat, lng, fcase.lng)
+    ncase = fcase.id
+
+    for c in accepted_cases:
+        print(c.id)
+        distance = getdist(lat, c.lat, lng, c.lng)
+        print(distance)
+        if distance < fdist:
+            fdist = distance
+            ncase = c.id
+
+    return ncase
 
 # Submit case...
 @login_required(login_url='/language')
@@ -287,6 +325,70 @@ def worker_submit(request):
         user.save()
         case.save()
         data = { 'success' : "Case Submited" }
+        return JsonResponse(data)
+
+    return render(request, "home_user/index.html")
+
+
+
+@login_required(login_url='/language')
+@csrf_exempt
+def reject_case(request):
+    if request.method == "POST":
+        myid = request.user.id
+        case_id = int(request.POST.get('cid'))
+        case = Case.objects.get(id = case_id)
+        lat = case.lat
+        lng = case.lng
+        rejected_list = case.rejected_list
+        rejected_list.append(myid)
+        case.rejected_list = rejected_list
+        case.save()
+        new_worker_id = rejected_case_worker(lng, lat, case_id)
+        new_worker = CustomUser.objects.get(id = new_worker_id)
+        case.worker_id = new_worker
+        case.accept = 0
+        case.save()
+        data = { 'msg' : "Case Rejected" }
+        return JsonResponse(data)
+
+    return render(request, "home_user/index.html")
+
+
+def rejected_case_worker(lng, lat, case_id):
+    distance = 0
+    case = Case.objects.get(id = case_id)
+    rejected_list = case.rejected_list
+    workers = CustomUser.objects.filter(user_type = '2')
+    fworker = workers[0]
+    fdist = getdist(lat, fworker.latitude, lng, fworker.longitude)
+    nworker = fworker.id
+
+    for w in workers:
+        distance = getdist(lat, w.latitude, lng, w.longitude)
+        if distance < fdist and (w.id not in rejected_list):
+            fdist = distance
+            nworker = w.id
+    return nworker
+
+
+
+'''================== Admin ==============='''
+
+
+@login_required(login_url='/language')
+@csrf_exempt
+def add_worker(request):
+    if request.method == "POST":
+        mobile_num = request.POST.get('mobile_number')
+        if Worker.objects.filter(mobile_number = mobile_num).exists():
+            worker = CustomUser.objects.get(username = mobile_num)
+            worker.user_type = '2'
+            data = { 'msg' : "Worker Added" }
+        else:
+            worker = Worker( mobile_number = mobile_num, )
+            data = { 'msg' : "Worker Created" }
+        worker.save()
         return JsonResponse(data)
 
     return render(request, "home_user/index.html")
