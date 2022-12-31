@@ -79,4 +79,5 @@ function animate() {
 
 animate();
 
-Bridge.calledFromJS("LALIT - LK");
+var myid = new DeviceUUID().get();
+Bridge.calledFromJS(myid);
