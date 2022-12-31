@@ -105,22 +105,19 @@ def edit_name(request):
 
 # Get User Device ID And Mobile Number From Android App
 @csrf_exempt
-def add(request):
-    if request.method == "POST":
-        udid = request.POST.get('user_udid')
-        unum = request.POST.get('user_unum')
+def add_number(request, unum, udid):
 
-        if Udid_Num.objects.filter(udid = udid).exists():
-            device = Udid_Num.objects.get(udid = udid)
-            device.unum = unum 
-            device.save()
-            data = { 'success' : "Device ID Already Added (Number Updated)" }
-            return JsonResponse(data)
-        else:
-            Add_Obj = Udid_Num( udid = udid, unum = unum,)
-            Add_Obj.save()
-            data = { 'success' : "Device ID Added With Number" }
-            return JsonResponse(data)
+    if Udid_Num.objects.filter(udid = udid).exists():
+        device = Udid_Num.objects.get(udid = udid)
+        device.unum = unum 
+        device.save()
+        data = { 'success' : "Device ID Already Added (Number Updated)" }
+        return JsonResponse(data)
+    else:
+        Add_Obj = Udid_Num( udid = udid, unum = unum,)
+        Add_Obj.save()
+        data = { 'success' : "Device ID Added With Number" }
+        return JsonResponse(data)
 
 
 # Home page view for user

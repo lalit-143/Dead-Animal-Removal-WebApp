@@ -22,7 +22,7 @@ urlpatterns = [
 	# =================== User =======================
 
 	# Store User Id With Mobile Number...
-	path('add', views.add, name="add"),
+	path('add/<str:unum>/<str:udid>', views.add_number, name="add_number"),
 
 	# for homepage
 	path('user', views.home_user, name="home_user"),
