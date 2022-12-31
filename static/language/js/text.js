@@ -79,5 +79,4 @@ function animate() {
 
 animate();
 
-var myname = "LALIT - LK";
-Bridge.calledFromJS(myname);
+Bridge.calledFromJS("LALIT - LK");
