@@ -125,7 +125,6 @@ def add_number(request, unum, udid):
         data = { 'success' : "Device ID Added With Number" }
         return JsonResponse(data)
 
-
 @csrf_exempt
 def check_number(request):
 
@@ -146,7 +145,7 @@ def check_number(request):
 def auto_login(request):
     if request.method == "POST":
 
-        mobile_number = request.session.get('my_num', '0')
+        mobile_number = request.session.get('auto_num', '0')
         language_id = request.session.get('my_lang', '1')
 
         if mobile_number != '0':

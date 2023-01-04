@@ -26,6 +26,7 @@ function checkauto() {
     var myid = new DeviceUUID().get();
     var fd = new FormData()
     fd.append('my_udid', myid)
+    console.log(myid);
 
     $.ajax({
             type:'POST',
@@ -40,7 +41,7 @@ function checkauto() {
                     auto_num = data.success;
                     my_auto_num = data.success;
                     document.getElementById("autonum_show").innerHTML = auto_num;
-                    toggleauto();                 
+                    toggleauto();               
                 }
             }
         })
