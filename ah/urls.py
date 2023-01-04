@@ -19,10 +19,15 @@ urlpatterns = [
 	# for edit or set name...
 	path('editname', views.edit_name, name="editname"),
 
-	# =================== User =======================
 
 	# Store User Id With Mobile Number...
 	path('add/<str:unum>/<str:udid>', views.add_number, name="add_number"),
+
+	path('checknumber', views.check_number, name="check_number"),
+
+	path('autologin', views.auto_login, name="auto_login"),
+
+	# =================== User =======================
 
 	# for homepage
 	path('user', views.home_user, name="home_user"),

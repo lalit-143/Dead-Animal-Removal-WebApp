@@ -38,6 +38,8 @@ def signin(request, lid):
         user.save()
         return redirect('home')
 
+    request.session['my_lang'] = lid
+
     if lid == 3:
         return render(request, 'login/index.html')
     elif lid == 2:
@@ -65,10 +67,14 @@ def verify_otp(request):
         r_otp = request.POST.get('receive_otp')
         s_otp = request.session.get('my_otp', '0')
         mobile_number = request.session.get('my_num', '0')
+        language_id = request.session.get('my_lang', '1')
 
         if s_otp == r_otp:
 
             if CustomUser.objects.filter(username = mobile_number).exists():
+                myuser = CustomUser.objects.get(username = mobile_number)
+                myuser.language = language_id
+                myuser.save()
                 user = authenticate(username=mobile_number, password=mobile_number)
                 login(request, user)
             else:
@@ -77,6 +83,7 @@ def verify_otp(request):
                 if Worker.objects.filter(mobile_number = mobile_number).exists():
                     user.user_type = '2'
                 user.is_active = True
+                user.language = language_id
                 user.save()
                 user = authenticate(username=mobile_number, password=mobile_number)
                 login(request, user)
@@ -101,7 +108,6 @@ def edit_name(request):
         myuser.save()
         return redirect('home')
 
-'''================== User ==============='''
 
 # Get User Device ID And Mobile Number From Android App
 @csrf_exempt
@@ -109,7 +115,7 @@ def add_number(request, unum, udid):
 
     if Udid_Num.objects.filter(udid = udid).exists():
         device = Udid_Num.objects.get(udid = udid)
-        device.unum = unum 
+        device.unum = unum
         device.save()
         data = { 'success' : "Device ID Already Added (Number Updated)" }
         return JsonResponse(data)
@@ -119,6 +125,51 @@ def add_number(request, unum, udid):
         data = { 'success' : "Device ID Added With Number" }
         return JsonResponse(data)
 
+
+@csrf_exempt
+def check_number(request):
+
+    if request.method == "POST":
+        udid = request.POST.get('my_udid')
+        if Udid_Num.objects.filter(udid = udid).exists():
+            device = Udid_Num.objects.get(udid = udid)
+            mobile_number = device.unum
+            request.session['auto_num'] = mobile_number
+            data = { 'success' : mobile_number }
+            return JsonResponse(data)
+        else:
+            data = { 'error' : "Device ID Not Found" }
+        return JsonResponse(data)
+
+
+@csrf_exempt
+def auto_login(request):
+    if request.method == "POST":
+
+        mobile_number = request.session.get('my_num', '0')
+        language_id = request.session.get('my_lang', '1')
+
+        if mobile_number != '0':
+            if CustomUser.objects.filter(username = mobile_number).exists():
+                myuser = CustomUser.objects.get(username = mobile_number)
+                myuser.language = language_id
+                myuser.save()
+                user = authenticate(username=mobile_number, password=mobile_number)
+                login(request, user)
+            else:
+                user = CustomUser( username = mobile_number,)
+                user.set_password(mobile_number)
+                if Worker.objects.filter(mobile_number = mobile_number).exists():
+                    user.user_type = '2'
+                user.is_active = True
+                user.language = language_id
+                user.save()
+                user = authenticate(username=mobile_number, password=mobile_number)
+                login(request, user)
+        data = { 'success' : "Login Success" }
+        return JsonResponse(data)
+
+'''================== User ==============='''
 
 # Home page view for user
 @login_required(login_url='/language')
@@ -174,9 +225,7 @@ def get_nearest_worker(lng, lat):
     nworker = fworker.id
 
     for w in workers:
-        print(w.id)
         distance = getdist(lat, w.latitude, lng, w.longitude)
-        print(distance)
         if distance < fdist:
             fdist = distance
             nworker = w.id
@@ -294,9 +343,7 @@ def get_nearest_case(lng, lat, myid):
     ncase = fcase.id
 
     for c in accepted_cases:
-        print(c.id)
         distance = getdist(lat, c.lat, lng, c.lng)
-        print(distance)
         if distance < fdist:
             fdist = distance
             ncase = c.id

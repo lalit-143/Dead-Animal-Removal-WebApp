@@ -10,7 +10,7 @@
     <link href="{% static 'login/css/style.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
-
+    <script src="{% static 'device-uuid.js' %}"></script>
 
 </head>
 
@@ -121,6 +121,48 @@
 
             </div>
         </div>
+
+    <div class="modal" id="modalal">
+        <div class="wlcontent">
+                
+                <h1 class="llfont">Add Location</h1>
+
+           
+
+                <div id="wlmessage" class="wlerror hidden"> Please Enable Location </div>
+        
+                <button class="wbutton12" onclick="hidemodalal()"> 
+                    <i class='bx bxs-location-plus bx-flip-horizontal bx-burst' ></i>
+                </button>
+        </div>
+
+    </div>
+
+
+    <div class="modalauto" id="automodalid">
+        <div class="autocontent">
+
+            <div class="wtext">
+
+                <wltext> Continue Login With </wltext><br>
+                <wltext1 id="autonum_show"></wltext1> 
+
+            </div>
+
+            <div class="btn2">
+                    <button class="c1btn" onclick="toggleauto()">
+                        No
+                    </button>
+
+                    <button class="c2btn" onclick="autologin()">
+                        Ok
+                    </button>
+
+                </div>
+        </div>
+    </div>
+
+
 
     </main>
 

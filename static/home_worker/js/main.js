@@ -418,7 +418,6 @@ function caseaccept(case_id) {
 }
 
 
-
 function rejectcase(r_cid) {
 
     var fd = new FormData()
