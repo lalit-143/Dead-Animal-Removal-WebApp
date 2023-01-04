@@ -26,7 +26,6 @@ function checkauto() {
     var myid = new DeviceUUID().get();
     var fd = new FormData()
     fd.append('my_udid', myid)
-    console.log(myid);
 
     $.ajax({
             type:'POST',

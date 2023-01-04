@@ -8,17 +8,25 @@
 
 	<link href="{% static 'language/css/bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'language/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'preloader.css' %}" rel="stylesheet">
 	<script src="{% static 'device-uuid.js' %}"></script>
 
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
 
+
+	<div id="overlay" class="pre-container">
+  		<div class="preloader"></div> 
+	</div>
+
+
 	<main id="main" class="main">
 
 		<section class="section">
 
 			<div class="row">
+
 
 				<div class="card">
 
@@ -53,11 +61,20 @@
 					</div>
 				</div>
 			</div>
-		</section>
 
+		</section>
 	</main>
 
 	<script src="{% static 'language/js/text.js' %}"></script>
+
+	<script type="text/javascript">
+
+		var overlay = document.getElementById("overlay");
+		window.addEventListener('load', function(){
+  			overlay.style.visibility = 'hidden';
+		})
+
+	</script>
 
 </body>
 
