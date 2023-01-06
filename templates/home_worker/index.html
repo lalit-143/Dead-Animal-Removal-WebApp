@@ -23,12 +23,17 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap" rel="stylesheet" />
 
+	<link href="{% static 'preloader.css' %}" rel="stylesheet">
+
 </head>
 
 <body>
 
-	<section class="preloader">
-	</section>
+		
+	<div id="overlay" class="pre-container">
+  		<div class="preloader"></div> 
+	</div>
+
 	<section id="home">
 
 		<div class="container">
@@ -756,8 +761,16 @@
 	<script src="{% static 'home_user/js/vegas.min.js' %}"></script>
 	<script src="{% static 'home_user/js/wow.min.js' %}"></script>
 
-	
+	<script type="text/javascript">
 
+		var overlay = document.getElementById("overlay");
+		window.addEventListener('load', function(){
+  			overlay.style.visibility = 'hidden';
+		})
+
+	</script>
+
+	
 </body>
 
 </html>

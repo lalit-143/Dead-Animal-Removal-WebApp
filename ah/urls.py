@@ -12,7 +12,7 @@ urlpatterns = [
 	path('language', views.language, name="language"),
 
 	# for authentication...
-	path('signin/<str:lid>', views.signin, name="signin"),
+	path('signin/<str:lid>/<str:myid>', views.signin, name="signin"),
 	path('sendotp', views.send_otp, name="sendotp"),
 	path('verifyotp', views.verify_otp, name="verifyotp"),
 

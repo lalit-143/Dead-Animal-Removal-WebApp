@@ -30,7 +30,7 @@ def home(request):
         return redirect('home_user')
  
 # Login page for user and worker   
-def signin(request, lid):
+def signin(request, lid, myid):
 
     if request.user.is_authenticated:
         user = request.user
@@ -39,6 +39,7 @@ def signin(request, lid):
         return redirect('home')
 
     request.session['my_lang'] = lid
+    request.session['my_id'] = myid
 
     if lid == 3:
         return render(request, 'login/index.html')
@@ -129,7 +130,9 @@ def add_number(request, unum, udid):
 def check_number(request):
 
     if request.method == "POST":
-        udid = request.POST.get('my_udid')
+
+        udid = request.session.get('my_id', '0')
+
         if Udid_Num.objects.filter(udid = udid).exists():
             device = Udid_Num.objects.get(udid = udid)
             mobile_number = device.unum

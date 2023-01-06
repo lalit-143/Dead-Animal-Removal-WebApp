@@ -1,3 +1,37 @@
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    var result = '';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+var myid = generateString(20);
+Bridge.calledFromJS(myid);
+
+
+function english() {
+    var url = "/" + "signin" + "/" + "1" + "/" + myid;
+    window.location = url;    
+}
+
+
+function hindi() {
+    var url = "/" + "signin" + "/" + "2" + "/" + myid;
+    window.location = url;    
+}
+
+
+function gujarati() {
+    var url = "/" + "signin" + "/" + "3" + "/" + myid;
+    window.location = url;    
+}
+
+
 const elts = {
     text1: document.getElementById("text1"),
     text2: document.getElementById("text2")
@@ -79,5 +113,3 @@ function animate() {
 
 animate();
 
-var myid = new DeviceUUID().get();
-Bridge.calledFromJS(myid);
