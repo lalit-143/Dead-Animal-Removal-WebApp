@@ -1,0 +1,304 @@
+
+:root {
+  --bg: #e0e4f6;
+  --fg: #17181c;
+  --primary: #255ff4;
+  --yellow: #d3aa64f5;
+  --yellow-t: rgba(244, 168, 37, 0);
+  --bezier: cubic-bezier(0.42,0,0.58,1);
+  --trans-dur: 0.3s;
+  font-size: calc(24px + (30 - 24) * (100vw - 320px) / (1280 - 320));
+}
+
+
+.modalrating {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(31, 31, 57, 0.689);
+  opacity: 0;
+  display: grid;
+  place-content: center;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.ratingcontent {
+  border-radius: 1.5rem;
+  background-image: linear-gradient(to top,  #a894acd0 0%, #91a7a7d8 99%, #a5a791d5 100%);
+  width: 90vw;
+  margin: 10px;
+  padding: 10px;
+  max-width: 350px;
+  text-align: center;
+  border: 1px solid rgba(239, 239, 229, 0.595);
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.rsbtn {
+  background-color: rgba(203, 209, 182, 0.35);
+  color: rgb(0, 0, 0);
+  border-radius: 0.7rem;
+  font-size: 16px;
+  width: 90%;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  text-align: center;
+  outline: none;
+  border: 1px solid;
+  border-color: #000000e4;
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+.rsbtn:hover {
+  background-color: rgba(145, 180, 168, 0.415);
+  color: rgb(0, 0, 0);
+  border-color: #c9dcd0;
+}
+
+
+.ratingtext{
+  font-family: "Mulish", sans-serif;
+  width: 90%;
+  margin: 10px auto 10px auto;
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  border-color: rgba(34, 35, 68, 0.452);
+  border-radius: 0.7rem;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+rtext{
+  font-size: 15px;
+  color: rgb(226, 253, 255);
+}
+
+rtext1{
+  font-size: 16px;
+  color: rgb(255, 245, 156);
+}
+
+rtext2{
+  font-size: 17px;
+  color: rgb(215, 255, 211);
+}
+
+rtext3{
+  font-size: 17px;
+  color: rgb(217, 203, 237);
+}
+
+
+.rhead {
+  font-family: 'Mulish',cursive;
+  color: rgba(47, 29, 56, 0.94);
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: auto;
+  padding: 5px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  width: 90%;
+  border-color: rgba(28, 29, 55, 0.452);
+  border-radius: 0.7rem;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.rating {
+  margin: 5px;
+  margin-bottom: 25px;
+  align-content: center;
+  display: grid;
+  position: relative;
+}
+.rating__display {
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 1.25em;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  color: rgb(165, 178, 178);
+}
+.rating__stars {
+  font-size: medium;
+  display: flex;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  align-content: center;
+}
+.rating__star {
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+  width: 2.2em;
+  height: 2em;
+}
+.rating__star-ring, .rating__star-fill, .rating__star-line, .rating__star-stroke {
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.rating__star-ring, .rating__star-fill, .rating__star-line {
+  stroke: var(--yellow);
+}
+.rating__star-fill {
+  fill: var(--yellow);
+  transform: scale(0);
+  transition: fill var(--trans-dur) var(--bezier), transform var(--trans-dur) var(--bezier);
+}
+.rating__star-stroke {
+  stroke: #c7cad1;
+  transition: stroke var(--trans-dur);
+}
+.rating__label {
+  cursor: pointer;
+  padding: 0.125em;
+}
+.rating__label--delay1 .rating__star-ring, .rating__label--delay1 .rating__star-fill, .rating__label--delay1 .rating__star-line, .rating__label--delay1 .rating__star-stroke {
+  animation-delay: 0.05s;
+}
+.rating__label--delay2 .rating__star-ring, .rating__label--delay2 .rating__star-fill, .rating__label--delay2 .rating__star-line, .rating__label--delay2 .rating__star-stroke {
+  animation-delay: 0.1s;
+}
+.rating__label--delay3 .rating__star-ring, .rating__label--delay3 .rating__star-fill, .rating__label--delay3 .rating__star-line, .rating__label--delay3 .rating__star-stroke {
+  animation-delay: 0.15s;
+}
+.rating__label--delay4 .rating__star-ring, .rating__label--delay4 .rating__star-fill, .rating__label--delay4 .rating__star-line, .rating__label--delay4 .rating__star-stroke {
+  animation-delay: 0.2s;
+}
+.rating__input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.rating__input:hover ~ [data-rating]:not([hidden]) {
+  display: none;
+}
+.rating__input-1:hover ~ [data-rating="1"][hidden], .rating__input-2:hover ~ [data-rating="2"][hidden], .rating__input-3:hover ~ [data-rating="3"][hidden], .rating__input-4:hover ~ [data-rating="4"][hidden], .rating__input-5:hover ~ [data-rating="5"][hidden], .rating__input:checked:hover ~ [data-rating]:not([hidden]) {
+  display: block;
+}
+.rating__input-1:hover ~ .rating__label:first-of-type .rating__star-stroke, .rating__input-2:hover ~ .rating__label:nth-of-type(-n + 2) .rating__star-stroke, .rating__input-3:hover ~ .rating__label:nth-of-type(-n + 3) .rating__star-stroke, .rating__input-4:hover ~ .rating__label:nth-of-type(-n + 4) .rating__star-stroke, .rating__input-5:hover ~ .rating__label:nth-of-type(-n + 5) .rating__star-stroke {
+  stroke: var(--yellow);
+  transform: scale(1);
+}
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-ring, .rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-ring, .rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-ring, .rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-ring, .rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-ring {
+  animation-name: starRing;
+}
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-stroke, .rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-stroke, .rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-stroke, .rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-stroke, .rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-stroke {
+  animation-name: starStroke;
+}
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-line, .rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-line, .rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-line, .rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-line, .rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-line {
+  animation-name: starLine;
+}
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-fill, .rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-fill, .rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-fill, .rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-fill, .rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-fill {
+  animation-name: starFill;
+}
+.rating__input-1:not(:checked):hover ~ .rating__label:first-of-type .rating__star-fill, .rating__input-2:not(:checked):hover ~ .rating__label:nth-of-type(2) .rating__star-fill, .rating__input-3:not(:checked):hover ~ .rating__label:nth-of-type(3) .rating__star-fill, .rating__input-4:not(:checked):hover ~ .rating__label:nth-of-type(4) .rating__star-fill, .rating__input-5:not(:checked):hover ~ .rating__label:nth-of-type(5) .rating__star-fill {
+  fill: var(--yellow-t);
+}
+.rating__sr {
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181c;
+    --fg: #e3e4e8;
+  }
+
+  .rating {
+    margin: auto;
+  }
+  .rating__star-stroke {
+    stroke: #454954;
+  }
+}
+@keyframes starRing {
+  from, 20% {
+    animation-timing-function: ease-in;
+    opacity: 1;
+    r: 8px;
+    stroke-width: 16px;
+    transform: scale(0);
+  }
+  35% {
+    animation-timing-function: ease-out;
+    opacity: 0.5;
+    r: 8px;
+    stroke-width: 16px;
+    transform: scale(1);
+  }
+  50%, to {
+    opacity: 0;
+    r: 16px;
+    stroke-width: 0;
+    transform: scale(1);
+  }
+}
+@keyframes starFill {
+  from, 40% {
+    animation-timing-function: ease-out;
+    transform: scale(0);
+  }
+  60% {
+    animation-timing-function: ease-in-out;
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes starStroke {
+  from {
+    transform: scale(1);
+  }
+  20%, to {
+    transform: scale(0);
+  }
+}
+@keyframes starLine {
+  from, 40% {
+    animation-timing-function: ease-out;
+    stroke-dasharray: 1 23;
+    stroke-dashoffset: 1;
+  }
+  60%, to {
+    stroke-dasharray: 12 12;
+    stroke-dashoffset: -12;
+  }
+}

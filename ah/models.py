@@ -51,6 +51,7 @@ class Case(models.Model):
 	worker_id = models.ForeignKey(CustomUser, related_name = 'worker_id', on_delete=models.DO_NOTHING)
 	accept = models.IntegerField(default=0)
 	rejected_list = ListTextField(base_field=IntegerField(), size=100,)
+	rating = models.CharField(max_length=50, default='0')
 
 	def __str__(self):
 

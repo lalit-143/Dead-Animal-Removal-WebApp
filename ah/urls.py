@@ -38,6 +38,8 @@ urlpatterns = [
 	# for add complaint...
 	path('complaint', views.complaint, name="complaint"),
 
+	path('addrating', views.add_rating, name="add_rating"),
+
 	# ================== Worker ======================
 
 	# for homepage

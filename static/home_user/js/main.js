@@ -14,7 +14,6 @@ const modalen = document.getElementById("modalen");
 const modalcomp = document.getElementById("modalcomp");
 const modalstatus = document.getElementById("modalstatus");
 
-
 const closebtn = document.getElementById("closebtn");
 const clickbtn = document.getElementById("clickbtn");
 const retakebtn = document.getElementById("retakebtn");

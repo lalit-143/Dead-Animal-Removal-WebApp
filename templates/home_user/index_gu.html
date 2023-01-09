@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="{% static 'home_user/css/stylemodal.css' %}">
 	<link rel="stylesheet" href="{% static 'home_user/css/statusmodal.css' %}">
 	<link rel="stylesheet" href="{% static 'home_user/css/profilemodal.css' %}">
+	<link rel="stylesheet" href="{% static 'home_user/css/rating.css' %}">
 
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -429,7 +430,7 @@
 				<div class="form12">
 
 					<input type="text" id="full_name" value={{user.full_name}}>
-					<button id="login-button" onclick="setname()">થઈ ગયું</button>
+					<button id="login-button" onclick="setname()"> ઉમેરો </button>
 
 				</div>
 				
@@ -467,6 +468,160 @@
 			</div>
 		</div>
 	</div>
+
+
+
+{% if ratingcase != None %}
+
+<div class="modalrating show-modal" id="ratingmodal">
+		<div class="ratingcontent">
+
+		<div class="ratingtext">
+			<rtext style="font-size: 20px;"> 
+		 		તમે <rtext1> {{ ratingcase.date }} </rtext1> ના રોજ <br> મોકલેલ કેસ <rtext2> ઉકેલાઈ </rtext2> ગયો છે.
+		 	<rtext>
+		</div>
+
+
+			<div>
+				<img class="image" src="/media/{{ratingcase.image}}" alt="Image">
+			</div>
+
+			<h1 class="rhead" style=" letter-spacing: 1px;font-size: 20px;"> રેટિંગ આપો </h1>
+				
+<form class="rating">
+	<div class="rating__stars">
+		<input id="rating-1" class="rating__input rating__input-1" type="radio" name="rating" value="1"> 
+		<input id="rating-2" class="rating__input rating__input-2" type="radio" name="rating" value="2">
+		<input id="rating-3" class="rating__input rating__input-3" type="radio" name="rating" value="3">
+		<input id="rating-4" class="rating__input rating__input-4" type="radio" name="rating" value="4">
+		<input id="rating-5" class="rating__input rating__input-5" type="radio" name="rating" value="5">
+
+
+		<label class="rating__label" for="rating-1" onclick="rating('1')">
+			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+				<g transform="translate(16,16)">
+					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
+				</g>
+				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<g transform="translate(16,16) rotate(180)">
+						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
+						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
+					</g>
+					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
+						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
+					</g>
+				</g>
+			</svg>
+			<span class="rating__sr">1 star—Terrible</span>
+		</label>
+		<label class="rating__label" for="rating-2" onclick="rating('2')">
+			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+				<g transform="translate(16,16)">
+					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
+				</g>
+				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<g transform="translate(16,16) rotate(180)">
+						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
+						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
+					</g>
+					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
+						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
+					</g>
+				</g>
+			</svg>
+			<span class="rating__sr">2 stars—Bad</span>
+		</label>
+		<label class="rating__label" for="rating-3" onclick="rating('3')" >
+
+
+			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+				<g transform="translate(16,16)">
+					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
+				</g>
+				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<g transform="translate(16,16) rotate(180)">
+						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
+						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
+					</g>
+					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
+						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
+					</g>
+				</g>
+			</svg>
+			<span class="rating__sr">3 stars—OK</span>
+		</label>
+		<label class="rating__label" for="rating-4" onclick="rating('4')">
+			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+				<g transform="translate(16,16)">
+					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
+				</g>
+				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<g transform="translate(16,16) rotate(180)">
+						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
+						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
+					</g>
+					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
+						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
+					</g>
+				</g>
+			</svg>
+			<span class="rating__sr">4 stars—Good</span>
+		</label>
+		<label class="rating__label" for="rating-5" onclick="rating('5')">
+			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+				<g transform="translate(16,16)">
+					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
+				</g>
+				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<g transform="translate(16,16) rotate(180)">
+						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
+						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
+					</g>
+					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
+						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
+						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
+					</g>
+				</g>
+			</svg>
+			<span class="rating__sr">5 stars—Excellent</span>
+		</label>
+
+		<p class="rating__display" data-rating="1" hidden style=" font-size: 15px;"> ખૂબ જ ખરાબ </p>
+		<p class="rating__display" data-rating="2" hidden style=" font-size: 15px;"> ખરાબ </p>
+		<p class="rating__display" data-rating="3" hidden style=" font-size: 15px;"> બરાબર </p>
+		<p class="rating__display" data-rating="4" hidden style=" font-size: 15px;"> સારું </p>
+		<p class="rating__display" data-rating="5" hidden style=" font-size: 15px;"> ઉત્તમ </p>
+	</div>
+</form>
+
+		<button type="submit" class="rsbtn" onclick="submitrating( {{ratingcase.id}} )"> મોકલો </button>
+
+		</div>
+	</div>
+
+{% endif %}
+
+	<script src="{% static 'home_user/js/rating.js' %}"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 

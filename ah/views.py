@@ -46,7 +46,7 @@ def signin(request, lid, myid):
     elif lid == 2:
         return render(request, 'login/index.html')
     else:
-        return render(request, 'login/index.html')
+        return render(request, 'login/index_en.html')
 
 # Send otp on entered number by user...
 @csrf_exempt
@@ -95,7 +95,7 @@ def verify_otp(request):
             data = { 'invalid' : "Invalid Otp" } 
             return JsonResponse(data)
 
-    return render(request, 'login/index.html')
+    return render(request, 'login/index_en.html')
 
 # Edit name or set name for user and worker...
 @login_required(login_url='/language')
@@ -114,16 +114,22 @@ def edit_name(request):
 @csrf_exempt
 def add_number(request, unum, udid):
 
-    if Udid_Num.objects.filter(udid = udid).exists():
-        device = Udid_Num.objects.get(udid = udid)
-        device.unum = unum
-        device.save()
-        data = { 'success' : "Device ID Already Added (Number Updated)" }
-        return JsonResponse(data)
+    index = unum.find('+')
+    
+    if (unum != 'None') and (index == -1):
+        if Udid_Num.objects.filter(udid = udid).exists():
+            device = Udid_Num.objects.get(udid = udid)
+            device.unum = unum
+            device.save()
+            data = { 'success' : "Device ID Already Added (Number Updated)" }
+            return JsonResponse(data)
+        else:
+            Add_Obj = Udid_Num( udid = udid, unum = unum,)
+            Add_Obj.save()
+            data = { 'success' : "Device ID Added With Number" }
+            return JsonResponse(data)
     else:
-        Add_Obj = Udid_Num( udid = udid, unum = unum,)
-        Add_Obj.save()
-        data = { 'success' : "Device ID Added With Number" }
+        data = { 'success' : " Mobile Number Not Valid " }
         return JsonResponse(data)
 
 @csrf_exempt
@@ -179,14 +185,21 @@ def home_user(request):
     myuser = request.user
     myid = request.user.id
     mycase = Case.objects.filter(user_id = myid)
-    data = {'cases':mycase}
+    if Case.objects.filter(user_id = myid, status = 'Solved', rating = '0').exists():
+        ratingcase = Case.objects.filter(user_id = myid, status = 'Solved', rating = '0')[0]
+        worker = ratingcase.worker_id
+        wname = worker.full_name
+
+    else:
+        ratingcase = None
+        wname = None
+    data = {'cases':mycase, 'ratingcase':ratingcase, 'rwname':wname }
     if myuser.language == '3':
         return render(request, "home_user/index_gu.html", data)
     elif myuser.language == '2':
         return render(request, "home_user/index_hi.html", data)
     else:
         return render(request, "home_user/index_en.html", data)
-
 
 # Submit case...
 @login_required(login_url='/language')
@@ -212,6 +225,9 @@ def submit(request):
             rejected_list = [0], )
         user.total_case += 1
         user.pending_case += 1
+        worker.total_case += 1
+        worker.pending_case += 1
+        worker.save()
         user.save() 
         case_obj.save()
         data = { 'success' : "Case Submited" }
@@ -271,6 +287,25 @@ def complaint(request):
         comp_obj.save()
         return redirect('home')
     return render(request, "home_user/index.html")
+
+
+
+@login_required(login_url='/language')
+@csrf_exempt
+def add_rating(request):
+    if request.method == "POST":
+
+        rcid = request.POST.get('rcid')
+        star = request.POST.get('star')
+
+        rcase = Case.objects.get(id = rcid)
+        rcase.rating = star
+        rcase.save()
+        data = { 'success' : "Rating Added" }
+        return JsonResponse(data)
+
+    return render(request, "home_user/index.html")
+
 
 
 '''================== Worker ==============='''
@@ -357,7 +392,7 @@ def get_nearest_case(lng, lat, myid):
 @csrf_exempt
 def worker_submit(request):
     if request.method == "POST":
-        user = request.user
+        worker = request.user
         case_id = int(request.POST.get('cid'))
         image = request.FILES.get('image')
         date = strftime("%d-%m-%Y", gmtime())
@@ -366,21 +401,25 @@ def worker_submit(request):
         case.date = date
         case.status = "Solved"
         case.accept = 0
+        user = case.user_id
         user.pending_case -= 1
         user.solved_case += 1
-        user.save()
+        worker.pending_case -= 1
+        worker.solved_case += 1
+        worker.save()
         case.save()
+        user.save()
         data = { 'success' : "Case Submited" }
         return JsonResponse(data)
 
     return render(request, "home_user/index.html")
 
 
-
 @login_required(login_url='/language')
 @csrf_exempt
 def reject_case(request):
     if request.method == "POST":
+        myworker = request.user
         myid = request.user.id
         case_id = int(request.POST.get('cid'))
         case = Case.objects.get(id = case_id)
@@ -394,6 +433,9 @@ def reject_case(request):
         new_worker = CustomUser.objects.get(id = new_worker_id)
         case.worker_id = new_worker
         case.accept = 0
+        myworker.total_case -= 1
+        myworker.pending_case -= 1
+        myworker.save()
         case.save()
         data = { 'msg' : "Case Rejected" }
         return JsonResponse(data)
