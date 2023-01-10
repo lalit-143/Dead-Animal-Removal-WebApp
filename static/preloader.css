@@ -26,6 +26,7 @@
 .preloader:before,
 .preloader:after,
 .preloader {
+	background-color: transparent;
 	border-radius: 50%;
 	width: 1.3em;
 	height: 1.3em;

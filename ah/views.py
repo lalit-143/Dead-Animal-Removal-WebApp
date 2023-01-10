@@ -184,7 +184,7 @@ def auto_login(request):
 def home_user(request):
     myuser = request.user
     myid = request.user.id
-    mycase = Case.objects.filter(user_id = myid)
+    mycase = Case.objects.filter(user_id = myid).order_by('status')
     if Case.objects.filter(user_id = myid, status = 'Solved', rating = '0').exists():
         ratingcase = Case.objects.filter(user_id = myid, status = 'Solved', rating = '0')[0]
         worker = ratingcase.worker_id
@@ -315,7 +315,7 @@ def add_rating(request):
 @login_required(login_url='/language')
 def home_worker(request):
     myid = request.user.id
-    mycase = Case.objects.filter(worker_id = myid)
+    mycase = Case.objects.filter(worker_id = myid).order_by('-id')
     mycomplaint = Complaint.objects.filter(worker_id = myid).order_by('-id')
     accepted_case = Case.objects.filter(worker_id = myid, accept=1)
     data = {'cases':mycase, 'complaints':mycomplaint, 'scases':accepted_case}
