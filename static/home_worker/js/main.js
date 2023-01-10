@@ -1,6 +1,7 @@
 var lbtn2 = document.getElementById('lbtn2');
 var message1 = document.getElementById('message1');
 var message2 = document.getElementById('message2');
+var message3 = document.getElementById('message3');
 var wlmessage = document.getElementById('wlmessage');
 
 const trigger = document.getElementById("trigger");
@@ -178,7 +179,9 @@ function wselectcase() {
             processData: false,
             success: function (data) {
                 if (data.msg) {
-                    console.log(data.msg);
+                    message3.classList.remove('hidden');
+                    togglemodal2()
+                    togglewmodal3()
                 }
                 else {
                 cid = data.id

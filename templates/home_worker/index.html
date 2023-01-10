@@ -188,12 +188,7 @@
 
 				<div id="message2" class="error2 hidden"> Please Enable Location </div>
 
-				<div id="message3" class="error2 hidden"> 
-
-					There Are No Accepted Case Found, 
-
-					<br> First Accept Any Case Then Try </div>
-
+				
 				<div class="btnrs">	
 
 					<button class="c3btn" id="retakebtn">
@@ -236,7 +231,14 @@
 
 				<button class="wcbtn"> 
 					<ws1 id="case_date"> </ws1> <ws2 id="case_id"></ws2>
+
+					<div id="message3" class="error3 hidden"> 
+					There Are No Accepted Case Found, 
+					First Accept Any Case Then Try Again.</div>
+
 				</button>
+
+				
 
 				<div class="btnrs">	
 
@@ -470,6 +472,17 @@
 								<descr2>{{c.description}}</descr2>
 							</button>
 						</div>
+
+						{% endif %}
+
+						{% if c.rating != '0' %}
+
+						<button class="wr1btn">
+
+						 <wrs1> Rating </wrs1> - <wrs2>{{ c.rating }}</wrs2>
+						  <i class='bx bx-star bx-flashing' style="color: rgb(156, 133, 0);"></i>
+
+						</button>
 
 						{% endif %}
 
