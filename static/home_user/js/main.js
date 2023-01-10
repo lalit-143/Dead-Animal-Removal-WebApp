@@ -126,8 +126,6 @@ function retakemodal() {
     togglemodal1();
 }
 
-
-
 function submitcase() {
     if (lng != ""){
         submitmodal();
@@ -240,8 +238,8 @@ function showPosition(position) {
 
 
 function submitmodal() {
-    togglemodal2();
 
+    togglemodal2();
     var ImageURL = photo;
     var block = ImageURL.split(";");
     var contentType = block[0].split(":")[1];
@@ -271,11 +269,11 @@ function submitmodal() {
             dataType: 'json',
             success: function (data) {
                 console.log(data.success)
+                togglemodal3();
             }
 
         })
 
-    togglemodal3();
 
 }
 

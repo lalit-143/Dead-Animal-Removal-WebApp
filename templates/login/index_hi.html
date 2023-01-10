@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Sign In</title>
+    <title>साइन इन</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -24,11 +24,11 @@
                     <div class="card-body">
 
                         <div class="title">
-                            <h2 class="login1">Login</h2>
+                            <h2 class="login1"> प्रवेश करें </h2>
                         </div>
 
                         <div class="label1">
-                            <h1>Enter Your Mobile Number</h1>
+                            <h1> अपना फोन नंबर दर्ज करे </h1>
                         </div>
 
 
@@ -36,10 +36,10 @@
                             <input type="number" maxlength="10" id="mobile_number" class="inputnum" readonly>
                         </div>
 
-                        <div id="message1" class="error1 hidden"> Please enter a valid number </div>
+                        <div id="message1" class="error1 hidden"> कृपया मान्य फोन नंबर दर्ज करें </div>
 
                         <button class="sendotp" id="btnsend">
-                            <span>Send OTP</span> <i class="sendicon fas fa-paper-plane"></i>
+                            <span> ओटीपी भेजें </span> <i class="sendicon fas fa-paper-plane"></i>
                         </button>
 
                         <div class="keyboard virtual-keyboard">
@@ -74,13 +74,11 @@
                             <i class="fas fa-arrow-left"></i>
                         </button>
 
-                        <h2 class="login2"> OTP Verification </h2>
+                        <h2 class="login2"> ओटीपी जाँच </h2>
                     </div>
 
                     <div class="label2">
-                        <h1>Type the verification
-                            code sent to <span class="phone"></span>
-                        </h1>
+                        <h1> <span class="phone"></span> पर भेजा गया सत्यापन कोड दर्ज करें </h1>
                     </div>
 
 
@@ -89,17 +87,17 @@
                     </div>
 
 
-                    <div id="message2" class="error1 hidden"> Invalid Otp </div>
+                    <div id="message2" class="error1 hidden"> अमान्य ओटीपी </div>
 
 
                     <button class="verifyotp" id="btncheck">
-                        <span>Verify Now</span> <i class="verifyicon fas fa-arrow-right"></i>
+                        <span> जाँच करें </span> <i class="verifyicon fas fa-arrow-right"></i>
                     </button>
 
 
                     <button class="resend text-muted text-center" id="btnresend" onclick="resendotp()">
-                        Didn't receive code?
-                        <span class="btn-resend">Resend</span>
+							कोड नहीं मिला ?
+                        <span class="btn-resend"> पुन: भेजें </span>
                     </button>
 
                     <div class="keyboard virtual-keyboard-2">
@@ -122,23 +120,24 @@
             </div>
         </div>
 
+
     <div class="modalauto" id="automodalid">
         <div class="autocontent">
 
             <div class="wtext">
 
-                <wltext> Continue Login With </wltext><br>
                 <wltext1 id="autonum_show"></wltext1> 
+                <wltext> से लॉगिन जारी रखें </wltext><br>
 
             </div>
 
             <div class="btn2">
                     <button class="c1btn" onclick="toggleauto()">
-                        No
+							नहीं
                     </button>
 
                     <button class="c2btn" onclick="autologin()">
-                        Ok
+							ठीक है
                     </button>
 
                 </div>

@@ -41,10 +41,10 @@ def signin(request, lid, myid):
     request.session['my_lang'] = lid
     request.session['my_id'] = myid
 
-    if lid == 3:
-        return render(request, 'login/index.html')
-    elif lid == 2:
-        return render(request, 'login/index.html')
+    if lid == '3':
+        return render(request, 'login/index_gu.html')
+    elif lid == '2':
+        return render(request, 'login/index_hi.html')
     else:
         return render(request, 'login/index_en.html')
 

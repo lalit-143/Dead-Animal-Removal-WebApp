@@ -182,7 +182,7 @@ function wselectcase() {
                     message3.classList.remove('hidden');
                     togglemodal2()
                     togglewmodal3()
-                }
+                }   
                 else {
                 cid = data.id
                 casedate = data.date;
@@ -302,6 +302,7 @@ function showPosition(position) {
 
 function submitmodal() {
 
+    togglewmodal3();
     var ImageURL = photo;
     var block = ImageURL.split(";");
     var contentType = block[0].split(":")[1];
@@ -325,7 +326,6 @@ function submitmodal() {
             },
             success: function (error) {
                 console.log("Case Submited");
-                togglewmodal3();
                 togglemodal3();
             }
 
