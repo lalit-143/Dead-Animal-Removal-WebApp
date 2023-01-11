@@ -478,10 +478,8 @@
 						{% if c.rating != '0' %}
 
 						<button class="wr1btn">
-
 						 <wrs1> Rating </wrs1> - <wrs2>{{ c.rating }}</wrs2>
 						  <i class='bx bx-star bx-flashing' style="color: rgb(156, 133, 0);"></i>
-
 						</button>
 
 						{% endif %}
@@ -517,7 +515,7 @@
 
 			</div>
 
-			<div class="scrollbar" id="body-scroll">
+			<div class="scrollbarc" id="body-scroll">
 
 				<div class="card-body">
 
@@ -561,7 +559,8 @@
 				<div class="photo1">
 					<div class="circle"></div>
 					<div class="circle2"></div>
-					<img alt="user photo1" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1435559/sloth.jpg">
+					<img alt="Profile Pic" src="/media/profile_pic/{{pic}}.jpg">
+					
 				</div>
 				<div class="title__contain">
 					<div class="Username">{{user.full_name}}</div>

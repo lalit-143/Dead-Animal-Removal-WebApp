@@ -1,6 +1,7 @@
 import random
 import re
 from .models import *
+from .decorator import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
@@ -181,10 +182,16 @@ def auto_login(request):
 
 # Home page view for user
 @login_required(login_url='/language')
+@user_only()
 def home_user(request):
+
+    profileint = random.randint(100,105)
+    profile = str(profileint)
     myuser = request.user
     myid = request.user.id
     mycase = Case.objects.filter(user_id = myid).order_by('status')
+    mycomplaint = Complaint.objects.filter(user_id = myid).order_by('-id')
+
     if Case.objects.filter(user_id = myid, status = 'Solved', rating = '0').exists():
         ratingcase = Case.objects.filter(user_id = myid, status = 'Solved', rating = '0')[0]
         worker = ratingcase.worker_id
@@ -193,7 +200,7 @@ def home_user(request):
     else:
         ratingcase = None
         wname = None
-    data = {'cases':mycase, 'ratingcase':ratingcase, 'rwname':wname }
+    data = {'cases':mycase, 'ratingcase':ratingcase, 'rwname':wname, 'complaints':mycomplaint, 'pic':profile }
     if myuser.language == '3':
         return render(request, "home_user/index_gu.html", data)
     elif myuser.language == '2':
@@ -204,6 +211,7 @@ def home_user(request):
 # Submit case...
 @login_required(login_url='/language')
 @csrf_exempt
+@user_only()
 def submit(request):
     if request.method == "POST":
         image = request.FILES.get('image')
@@ -268,6 +276,7 @@ def getdist(lat1, lat2, lon1, lon2):
 # add complaint to pending case...
 @login_required(login_url='/language')
 @csrf_exempt
+@user_only()
 def complaint(request):
     if request.method == "POST":
 
@@ -277,11 +286,13 @@ def complaint(request):
 
         case = Case.objects.get(id = case_id)
         worker = case.worker_id
+        user = case.user_id
 
         comp_obj = Complaint(
             case_id = case,
             complaint_box = complaint,
             worker_id = worker,
+            user_id = user,
             complaint_date = date, )
 
         comp_obj.save()
@@ -292,6 +303,7 @@ def complaint(request):
 
 @login_required(login_url='/language')
 @csrf_exempt
+@user_only()
 def add_rating(request):
     if request.method == "POST":
 
@@ -313,18 +325,22 @@ def add_rating(request):
 
 # Home Page view for worker
 @login_required(login_url='/language')
+@worker_only()
 def home_worker(request):
+    profileint = random.randint(100,105)
+    profile = str(profileint)
     myid = request.user.id
     mycase = Case.objects.filter(worker_id = myid).order_by('-id')
     mycomplaint = Complaint.objects.filter(worker_id = myid).order_by('-id')
     accepted_case = Case.objects.filter(worker_id = myid, accept=1)
-    data = {'cases':mycase, 'complaints':mycomplaint, 'scases':accepted_case}
-    return render(request, "home_worker/index.html", data)
+    data = {'cases':mycase, 'complaints':mycomplaint, 'scases':accepted_case, 'pic':profile}
+    return render(request, "home_worker/index_en.html", data)
 
 
 # Edit Location or set Location for worker...
 @login_required(login_url='/language')
 @csrf_exempt
+@worker_only()
 def add_location(request):
 
     if request.method == "POST":
@@ -340,6 +356,7 @@ def add_location(request):
 
 @login_required(login_url='/language')
 @csrf_exempt
+@worker_only()
 def case_accept(request):
 
     if request.method == "POST":
@@ -354,6 +371,7 @@ def case_accept(request):
 
 @login_required(login_url='/language')
 @csrf_exempt
+@worker_only()
 def case_near(request):
 
     if request.method == "POST":
@@ -390,6 +408,7 @@ def get_nearest_case(lng, lat, myid):
 # Submit case...
 @login_required(login_url='/language')
 @csrf_exempt
+@worker_only()
 def worker_submit(request):
     if request.method == "POST":
         worker = request.user
@@ -417,6 +436,7 @@ def worker_submit(request):
 
 @login_required(login_url='/language')
 @csrf_exempt
+@worker_only()
 def reject_case(request):
     if request.method == "POST":
         myworker = request.user
@@ -466,6 +486,7 @@ def rejected_case_worker(lng, lat, case_id):
 
 @login_required(login_url='/language')
 @csrf_exempt
+@admin_only()
 def add_worker(request):
     if request.method == "POST":
         mobile_num = request.POST.get('mobile_number')

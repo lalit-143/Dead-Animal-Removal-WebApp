@@ -60,6 +60,7 @@
   overflow: hidden;
   width: 100px;
   height: 100px;
+  opacity: 90%;
 }
 .photo1:hover .circle, .photo1:hover .circle2 {
   animation: circlespin 1s ease-in-out;

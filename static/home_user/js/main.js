@@ -13,6 +13,8 @@ const modalsetting = document.getElementById("modalsetting");
 const modalen = document.getElementById("modalen");
 const modalcomp = document.getElementById("modalcomp");
 const modalstatus = document.getElementById("modalstatus");
+const modalcomplaint = document.getElementById("modalcomplaint");
+
 
 const closebtn = document.getElementById("closebtn");
 const clickbtn = document.getElementById("clickbtn");
@@ -75,6 +77,10 @@ function showprofilemodal() {
 
 function showsettingmodal() {
     modalsetting.classList.toggle("show-modal");
+}
+
+function togglecomplaint() {
+    modalcomplaint.classList.toggle("show-modal");
 }
 
 
