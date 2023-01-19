@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
 	total_case = models.IntegerField(default=0)
 	pending_case = models.IntegerField(default=0)
 	solved_case = models.IntegerField(default=0)
-	latitude = models.CharField(max_length=100, default="0")
+	latitude = models.CharField(max_length=100, default="0")	
 	longitude = models.CharField(max_length=100, default="0")
 
 	def __str__(self):
