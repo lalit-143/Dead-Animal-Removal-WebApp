@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
 
 	def __str__(self):
 
-		return self.full_name + " - " + str(self.id)
+		return self.full_name + " ( " + "ID - " + str(self.id) + " ) "
 
 
 class Case(models.Model):
@@ -58,7 +58,7 @@ class Case(models.Model):
 		dt = self.date
 		sts = self.status
 		cid = str(self.id)
-		return dt + " ( " + sts + " ) " + cid
+		return dt + " [ " + sts + " ] " + " ( " + " ID - " + cid + " ) "
 
 
 class Complaint(models.Model):

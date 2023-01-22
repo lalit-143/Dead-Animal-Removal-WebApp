@@ -1,0 +1,32 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 66, 68, 0.776);
+  opacity: 0;
+  display: grid;
+  place-content: center;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.modal-image {
+  max-width: 350px;
+  max-height: 350px;
+  margin: auto;
+  border-radius: 1rem;
+  margin-bottom: -10px;
+}

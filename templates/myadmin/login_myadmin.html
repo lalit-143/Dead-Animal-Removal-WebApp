@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Admin Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <link href="https://fonts.googleapis.com/css?family=Nunito:600,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/main/admin.css' %}" />
+
+</head>
+<body id="body">
+
+<div id="login-card" class="card">
+<div class="card-body">
+  <h2 class="text-center"> WellCome </h3>
+  <p class="text-center" style=" margin-bottom: -10px; ">Please Login To Access The Admin Panel</p>
+
+  <br>
+  <form action="/myadmin/login" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="Username" class="form-control" id="email" placeholder="Enter Username" name="username">
+    </div>
+    <div class="form-group">  
+      <input type="password" class="form-control" id="email" placeholder="Enter Password" name="password">
+    </div>
+    <button type="submit" id="button" class="btn btn-primary deep-purple btn-block " >SignIn</button>
+    <br>
+   
+  </form>
+</div>
+<div>
+  
+</body>
+</html>

@@ -25,7 +25,10 @@ def language(request):
 @login_required(login_url='/language')
 def home(request):
     myuser = request.user
-    if myuser.user_type == '2':
+
+    if myuser.user_type == '3':
+        return redirect('home_myadmin')
+    elif myuser.user_type == '2':
         return redirect('home_worker')
     else:
         return redirect('home_user')
@@ -185,7 +188,7 @@ def auto_login(request):
 @user_only()
 def home_user(request):
 
-    profileint = random.randint(100,105)
+    profileint = random.randint(101,133)
     profile = str(profileint)
     myuser = request.user
     myid = request.user.id
@@ -296,7 +299,8 @@ def complaint(request):
             complaint_date = date, )
 
         comp_obj.save()
-        return redirect('home')
+        data = { 'success' : "Complaint Added" }
+        return JsonResponse(data)
     return render(request, "home_user/index.html")
 
 
@@ -327,15 +331,20 @@ def add_rating(request):
 @login_required(login_url='/language')
 @worker_only()
 def home_worker(request):
-    profileint = random.randint(100,105)
+    myuser = request.user
+    profileint = random.randint(101,133)
     profile = str(profileint)
     myid = request.user.id
     mycase = Case.objects.filter(worker_id = myid).order_by('-id')
     mycomplaint = Complaint.objects.filter(worker_id = myid).order_by('-id')
     accepted_case = Case.objects.filter(worker_id = myid, accept=1)
     data = {'cases':mycase, 'complaints':mycomplaint, 'scases':accepted_case, 'pic':profile}
-    return render(request, "home_worker/index_en.html", data)
-
+    if myuser.language == '3':
+        return render(request, "home_worker/index_gu.html", data)
+    elif myuser.language == '2':
+        return render(request, "home_worker/index_hi.html", data)
+    else:
+        return render(request, "home_worker/index_en.html", data)
 
 # Edit Location or set Location for worker...
 @login_required(login_url='/language')
@@ -366,7 +375,6 @@ def case_accept(request):
         case.save()
         data = { 'msg' : "case accepted" }
         return JsonResponse(data)
-
 
 
 @login_required(login_url='/language')
@@ -484,6 +492,112 @@ def rejected_case_worker(lng, lat, case_id):
 '''================== Admin ==============='''
 
 
+# Check Otp for auth
+@csrf_exempt
+def login_myadmin(request):
+    if request.method == "POST":
+    
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if CustomUser.objects.filter(username = username).exists():
+            user = authenticate(username=username, password=password)
+            if user != None:
+                login(request, user)
+                return redirect('home_myadmin')
+    return render(request, 'myadmin/login_myadmin.html')
+
+
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def home_myadmin(request):
+    totalusers = CustomUser.objects.filter(user_type = '1').count()
+    totalworkers = CustomUser.objects.filter(user_type = '2').count()
+    totalcases = Case.objects.count()
+    totalcomps = Complaint.objects.count()
+    pending_case = Case.objects.filter(status = 'Pending').count()
+    pending_ratio = (pending_case * 100)/totalcases
+
+    data = { 'totalusers' : totalusers,
+     'totalworkers' : totalworkers,
+     'totalcases' : totalcases,
+     'totalcomps' : totalcomps,
+     'pending_ratio' : pending_ratio,}
+    return render(request, "myadmin/home_myadmin.html", data)
+
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def complaint_myadmin(request):
+    complaints = Complaint.objects.all()
+    data = { 'complaints' : complaints}
+    return render(request, "myadmin/view_complaint.html", data)
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def view_worker_myadmin(request):
+    workers = CustomUser.objects.filter(user_type = '2')
+    data = { 'workers' : workers}
+    return render(request, "myadmin/view_worker.html", data)
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def add_worker_myadmin(request):
+    if request.method == "POST":
+        mobile_num = request.POST.get('mobile_number')
+        if Worker.objects.filter(mobile_number = mobile_num).exists():
+            worker = CustomUser.objects.get(username = mobile_num)
+            worker.user_type = '2'
+            data = { 'msg' : "Excited User Converted Into Worker" }
+        else:
+            worker = Worker( mobile_number = mobile_num, )
+            data = { 'msg' : "Worker Number Added" }
+        worker.save()
+    worknums = Worker.objects.all()
+    data = { 'worknums' : worknums}
+    return render(request, "myadmin/add_worker.html", data)
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def delete_worker_myadmin(request, wnid):
+    worknum = Worker.objects.get(id = wnid)
+    worknum.delete()
+    return redirect('add_worker_myadmin')
+
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def view_user_myadmin(request):
+    users = CustomUser.objects.filter(user_type = '1')
+    data = { 'users' : users}
+    return render(request, "myadmin/view_user.html", data)
+
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def pending_case_myadmin(request):
+    cases = Case.objects.filter(status = 'Pending')
+    data = { 'cases' : cases}
+    return render(request, "myadmin/pending_case.html", data)
+
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def solved_case_myadmin(request):
+    cases = Case.objects.filter(status = 'Solved')
+    data = { 'cases' : cases}
+    return render(request, "myadmin/solved_case.html", data)
+
+
 @login_required(login_url='/language')
 @csrf_exempt
 @admin_only()
@@ -499,5 +613,11 @@ def add_worker(request):
             data = { 'msg' : "Worker Created" }
         worker.save()
         return JsonResponse(data)
-
     return render(request, "home_user/index.html")
+
+# Home Page view for Admin
+@login_required(login_url='/myadmin/login')
+@admin_only()
+def logout_myadmin(request):
+    logout(request)
+    return redirect('home_myadmin')

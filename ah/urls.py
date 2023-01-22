@@ -59,7 +59,27 @@ urlpatterns = [
 
 	# ================== Admin ======================
 
-	path('addworker', views.add_worker, name="add_worker"),
+	path('myadmin', views.home_myadmin, name="home_myadmin"),
+
+	path('myadmin/login', views.login_myadmin, name="login_myadmin"),
+
+	path('myadmin/complaint', views.complaint_myadmin, name="complaint_myadmin"),
+
+	path('myadmin/worker/view', views.view_worker_myadmin, name="view_worker_myadmin"),
+
+	path('myadmin/worker/add', views.add_worker_myadmin, name="add_worker_myadmin"),
+	
+	path('myadmin/worker/delete/<str:wnid>', views.delete_worker_myadmin, name="delete_worker_myadmin"),
+
+	path('myadmin/user/view', views.view_user_myadmin, name="view_user_myadmin"),
+
+	path('myadmin/case/pending', views.pending_case_myadmin, name="pending_case_myadmin"),
+
+	path('myadmin/case/solved', views.solved_case_myadmin, name="solved_case_myadmin"),
+
+	path('myadmin/logout', views.logout_myadmin, name="logout_myadmin"),
+
+	path('myadmin/addworker', views.add_worker, name="add_worker"),
 
 
 ]

@@ -300,14 +300,15 @@ function submitcomp() {
             data: fd,
             contentType: false,
             processData: false,
-            error: function (error) {
-                console.log("An error occurred")
+            success: function (data) {
+                console.log(data.success)
+                showmodalcomp();
+                window.location = "/";
             }
 
         })
 
-    showmodalcomp();
-
+    console.log("error to submit complaint")
 }
 
 
