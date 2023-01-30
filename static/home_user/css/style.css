@@ -27,7 +27,7 @@ body {
 h1 {
   font-size: 2rem;
   color: azure;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   font-weight: 700;
   text-transform: capitalize;
 }
@@ -40,7 +40,32 @@ p {
 }
 
 
+.myname {
+  background-color: #e6efef82;
+  padding: 12px; 
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 10px;
+  font-size: 111%;
+  border: 1px solid rgba(227, 227, 227, 0.392);
+  box-shadow: 1px 1px 30px 10px rgba(227, 222, 222, 0.569);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  opacity: 80%;
 
+}
+
+
+n1 {
+  color: #b4c7d6;
+  background-image: -webkit-linear-gradient(45deg, #36424ad4 24%,#594351dd 61%,#504d3ad7 88%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
 
 /* preloader section  */
 .preloader {

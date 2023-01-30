@@ -43,7 +43,7 @@ def worker_only(view_to_return="home"):
         return _wrapped_view
     return decorator
   
-def admin_only(view_to_return="home"):
+def admin_only(view_to_return="login_myadmin"):
     def decorator(view):
         @wraps(view)
         def _wrapped_view(request, *args, **kwargs):

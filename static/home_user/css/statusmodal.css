@@ -20,7 +20,7 @@
   width: 90vw;
   max-width: 350px;
   max-height: 600px;
-  min-height: 400px;
+  min-height: 60vh;
 }
 
 .card-body {

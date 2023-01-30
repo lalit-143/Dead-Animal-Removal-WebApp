@@ -58,10 +58,10 @@ def signin(request, lid, myid):
 def send_otp(request):
     if request.method == "POST":
         mobile_number = request.POST.get('mobile_num')
-        #otp = send_otp_to_phone(mobile_number)
+        otp = send_otp_to_phone(mobile_number)
         data = { 'success' : "OTP Send Success" }
         request.session['my_num'] = mobile_number
-        request.session['my_otp'] = "1234"
+        request.session['my_otp'] = otp
         return JsonResponse(data)
 
 # Check Otp for auth
@@ -550,14 +550,17 @@ def view_worker_myadmin(request):
 def add_worker_myadmin(request):
     if request.method == "POST":
         mobile_num = request.POST.get('mobile_number')
-        if Worker.objects.filter(mobile_number = mobile_num).exists():
-            worker = CustomUser.objects.get(username = mobile_num)
-            worker.user_type = '2'
-            data = { 'msg' : "Excited User Converted Into Worker" }
-        else:
-            worker = Worker( mobile_number = mobile_num, )
-            data = { 'msg' : "Worker Number Added" }
-        worker.save()
+        if not(Worker.objects.filter(mobile_number = mobile_num).exists()) and not(mobile_num == ''):
+            if CustomUser.objects.filter(username = mobile_num).exists():
+                worker = CustomUser.objects.get(username = mobile_num)
+                worker.user_type = '2'
+                worker.save()
+                worker_obj = Worker( mobile_number = mobile_num, )
+                data = { 'msg' : "Excited User Converted Into Worker" }
+            else:
+                worker_obj = Worker( mobile_number = mobile_num, )
+                data = { 'msg' : "Worker Number Added" }
+            worker_obj.save()
     worknums = Worker.objects.all()
     data = { 'worknums' : worknums}
     return render(request, "myadmin/add_worker.html", data)
@@ -567,6 +570,13 @@ def add_worker_myadmin(request):
 @admin_only()
 def delete_worker_myadmin(request, wnid):
     worknum = Worker.objects.get(id = wnid)
+    mobile_num = worknum.mobile_number
+    try:
+        worker = CustomUser.objects.get(username = mobile_num)
+        worker.user_type = '1'
+        worker.save()
+    except:
+        pass
     worknum.delete()
     return redirect('add_worker_myadmin')
 
@@ -597,8 +607,7 @@ def solved_case_myadmin(request):
     data = { 'cases' : cases}
     return render(request, "myadmin/solved_case.html", data)
 
-
-@login_required(login_url='/language')
+@login_required(login_url='/myadmin/login')
 @csrf_exempt
 @admin_only()
 def add_worker(request):
