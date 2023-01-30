@@ -29,7 +29,7 @@ CSRF_TRUSTED_ORIGINS=['https://*.animals-heaven.up.railway.app', 'http://*', 'ht
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '.vercel.app']
 
 
 # Application definition
