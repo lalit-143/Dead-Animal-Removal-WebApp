@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 API_KEY = '6d7e7327-808b-11ed-9158-0200cd936042'
+#API_KEY = 'ad76a5d2-a12c-11ed-813b-0200cd936042'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

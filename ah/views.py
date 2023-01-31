@@ -251,15 +251,15 @@ def get_nearest_worker(lng, lat):
     distance = 0
     workers = CustomUser.objects.filter(user_type = '2')
     fworker = workers[0]
-    fdist = getdist(lat, fworker.latitude, lng, fworker.longitude)
+    fdist = getdist(lat, fworker.latitude, lng, fworker.longitude)  #20
     nworker = fworker.id
 
     for w in workers:
-        distance = getdist(lat, w.latitude, lng, w.longitude)
-        if distance < fdist:
+        distance = ge
+        tdist(lat, w.latitude, lng, w.longitude)
+        if distance < fdist: 
             fdist = distance
             nworker = w.id
-
     return nworker
 
 
@@ -519,8 +519,11 @@ def home_myadmin(request):
     totalcases = Case.objects.count()
     totalcomps = Complaint.objects.count()
     pending_case = Case.objects.filter(status = 'Pending').count()
-    pending_ratio = (pending_case * 100)/totalcases
-
+    pending_ratio = 50
+    try:
+        pending_ratio = (pending_case * 100)/totalcases
+    except:
+        pass
     data = { 'totalusers' : totalusers,
      'totalworkers' : totalworkers,
      'totalcases' : totalcases,
