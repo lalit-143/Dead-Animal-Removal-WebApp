@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .auth import send_otp_to_phone
 from time import gmtime, strftime
+from twilio.rest import Client 
 import simplejson as json
 from math import radians, cos, sin, asin, sqrt
 

@@ -78,6 +78,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'animal.wsgi.application'
 
+TWILIO_ACCOUNT_SID = "ACa39937a0d910298ecf27f66cdcd3d134"
+TWILIO_AUTH_TOKEN = "221928b279c21d8496e63da442a5528a"
+TWILIO_NUMBER = "9849216210"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
